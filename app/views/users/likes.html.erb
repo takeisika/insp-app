@@ -1,5 +1,6 @@
 <%@user=User.find_by(id:params[:id])%>
 
+
 <div class="user_show">
      <div class="user_show_top">
         <%if @user.avator.attached?%>
@@ -48,7 +49,8 @@
 
 
 </div>
-
+</div>
+</div>
 
 
 
@@ -87,7 +89,7 @@
                    </div></object>
                    <div class="index_comments">
                      <object><%= link_to("/posts/#{@post.id}/comment",class: "link")do %>
-                     <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: @post.id).count%></span>
+                     <span class="fas fa-comment fa-xs"><%=Comment.where(post_id: @post.id).count%></span>
                      <%end%></object>
                    </div>
                  </div>
@@ -183,24 +185,75 @@
        </div>
 
                 </div>
-                <div class="comment_edit">
-                <%if @current_user%>
-                 <%if @current_user.id==@post.user_id%>
-                  <object><%=link_to("編集","/posts/#{@post.id}/edit")%></object>
-                  <object><%=link_to("削除","/posts/#{@post.id}/destroy",method: :post,remote: true)%></object>
-                 <%end%>
+
+               
+               <div class="comment_edit">
+               <%if @current_user%>
+               <%if @current_user.id==@post.user_id%>
+                 <div class="post_edit_delete_modal_button">
+                 <span class="fas fa-ellipsis-h fa-lg"></span>
+                 <div class="post_edit_delete_modal_open">
+                 <div class="post_edit_delete_modal_wrapper">
+                 <div class="post_edit_delete_modal">
+                 <object><%=link_to("編集","/posts/#{@post.id}/edit",class:"post_edit_modal_letter")%></object>
+                 <object><%=link_to("削除","/posts/#{@post.id}",method: :delete,remote: true,class:"post_delete_modal_letter")%></object>
+                 <p class="post_modal_back">戻る</p>         
+                 </div>
+                 </div>
+                 </div> 
+                 </div>
                 <%end%>
-               </div>                
+                <%end%>
+              </div>               
+
+
            
            </div>
           <%end%>
           <%end%>
-          </div>
         <%end%>
-    </div>
 
 <%else%>
 <div class="user_show_list_else">
  <p>いいねした投稿はまだありません!</p>
 </div>
 <%end%>
+
+
+
+
+<script>
+
+var window_height = $(window).height();
+var modal_height = $(".post_edit_delete_modal").height();
+$(".post_edit_delete_modal").css("margin-top",((window_height - modal_height)/2) + "px");
+
+
+$(".post_edit_delete_modal_button").click(function(e){
+   $(this).find(".post_edit_delete_modal_open").fadeIn();
+   e.preventDefault();
+});
+
+
+$(".post_edit_modal_letter").click(function() {
+    window.location.href = $(this).attr('href'); 
+});
+
+
+
+$(".post_modal_back,.post_edit_delete_modal_open").click(function(e){
+   var target = $(e.target);
+   if(target.hasClass('post_delete_modal_letter')==false) {
+      $(".post_edit_delete_modal_open").fadeOut();
+      return false;
+   }
+});
+
+
+$(".index_user_name").hover(
+function(){
+  $(this).find(".hover_profile").fadeIn();
+},function(){
+   $(this).find(".hover_profile").fadeOut();
+});
+</script>

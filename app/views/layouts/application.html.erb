@@ -9,10 +9,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
   </head>
 
   <body>
@@ -22,26 +21,66 @@
   <div class="header">
    <%if @current_user%>
    <div class="header_menu">
-   <div class="title_insp">insp</div>
+   <div class="title_insp_login">insp</div>
    <div class="menu_button">
-       <%=link_to("","/follows/index", class:"fas fa-home  fa-lg") %>
-       <%=link_to("","/posts/index", class:"fas fa-medal  fa-lg")%>
-       <%=link_to("","/posts/_form", class:"fas fa-edit  fa-lg")%>
-       <%=link_to("","/posts/search_form" ,class:"fas fa-search  fa-lg")%>
-       <%=link_to("","/users/#{@current_user.id}",class:"fas fa-user  fa-lg")%>
-       <span><%=link_to("👋","/logout",{method: :post})%></span>
+       <%=link_to("","/follows", class:"fas fa-home  fa-lg index_button") %>
+       <%=link_to("","/posts", class:"fas fa-medal  fa-lg index_button")%>
+       <%=link_to("","/posts/new", class:"fas fa-edit  fa-lg index_button")%>
+       <%=link_to("","/posts/search_form" ,class:"fas fa-search  fa-lg index_button")%>
+       <%=link_to("","/messages",class:"fas fa-envelope fa-lg index_button") %> 
+
+       <!--talks、プッシュ通知-->
+       <%@talks=Talk.where(read:nil, your_id:@current_user.id).select(:my_id).distinct%>
+       <%if @talks.count>=1%>
+       <span id="talk_unread_count"><%=@talks.count%></span>
+       <%end%>
+       <!--talks、プッシュ通知--> 
+
+       <%=link_to("","/notifications",class:"fas fa-bell fa-lg index_button") %>
+
+       <!--notification、プッシュ通知-->
+       <%@notifications=Notification.where(read:nil,visited_id:@current_user).where.not(visitor_id:@current_user.id)%>
+       <%if @notifications.count>=1%>
+       <span id="notification_unread_count"><%=@notifications.count%></span>
+       <%end%>
+       <!--notification、プッシュ通知-->  
+
+       <%=link_to("","/users/#{@current_user.id}",class:"fas fa-user  fa-lg index_button application-right")%>
+
+       <script>
+
+       var page=$(location).attr('pathname');
+
+       if(page=="/"){
+         $(".fa-home").css("color","black");
+       }
+
+       $(".index_button").each(function(){
+        if (page==$(this).attr("href")){
+          $(this).css("color","black");
+       }});
+
+       </script>
+       
       </div>
       </div>
    <%else%>
    <div class="header_menu">
-   <div class="title_insp">insp</div>
+   <div class="title_insp"><%=link_to("insp","/home/about",class:"else_index_button")%></div>
    <div class="menu_button_else">
-    <%=link_to("TOP","/")%>
-    <%=link_to("新規登録","/users/new")%>
-    <%=link_to("ログイン","/users/login_form")%>
-    <%=link_to("ゲスト利用(閲覧用)","/users/guest_form")%>
-    <span><%=link_to("アプリについて","/home/about")%></span>
+    <%=link_to("新規登録","/users/new",class:"else_index_button")%>
+    <%=link_to("ログイン","/users/login_form",class:"else_index_button")%>
+    <%=link_to("ゲスト(閲覧用)","/users/guest_form",class:"application-right else_index_button")%>
     </div>
+    <script>
+    var page=$(location).attr('pathname');
+
+    $(".else_index_button").each(function(){
+     if (page==$(this).attr("href")){
+       $(this).css("color","white");
+    }});
+
+    </script>    
     </div>
    <%end%>
 
@@ -60,8 +99,7 @@
 
 
 
-   
     <%= yield %>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
   </body>
 </html>

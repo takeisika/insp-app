@@ -1,0 +1,44 @@
+<% @user=User.find_by(id: params[:id])%>
+<% @followings=Follow.where(following_id: @user.id) %>
+
+<p class="following_title"><%=@user.name%>さんがフォローしているユーザー</p>
+
+<div class="following_container">
+
+ <% @followings.each do |following|%>
+    <%@users=User.where(id: following.followed_id)%>
+     <%@users.each do |user|%>
+      <%= link_to("/users/#{user.id}",class: "link")do %>
+      <div class="following_user_index">
+         <div class="following_user_left">
+         <div class="following_user_img">
+           <%if user.avator.attached?%>
+              <%=image_tag(user.avator)%>
+           <%else%>
+             <%=image_tag "/default.jpg"%>
+           <%end%>
+           </div>
+           <p class="following_user_name">
+           　<object><%=link_to(user.name,"/users/#{user.id}")%></object>
+           </p>
+         </div>
+
+
+         <div class="following_user_right">
+         <div class="following_user_right_<%=user.id%>">
+         <%if @current_user.id!=user.id%>
+         <% @follow=Follow.find_by(following_id: @current_user.id,followed_id: user.id) %>
+         <%if @follow%>
+         <p class="follow_button"><object><%=link_to("following","/users/#{user.id}/follows/#{@follow.id}",method: :delete,remote: true)%></object></p>
+         <%else%>
+         <p class="not_follow_button"><object><%=link_to("follow","/users/#{user.id}/follows",method: :post,remote: true)%></object></p>
+         <%end%>
+         <%end%>
+         </div>
+         </div>
+
+      </div>
+      <%end%>
+     <%end%>
+ <%end%>
+</div>

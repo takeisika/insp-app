@@ -1,17 +1,74 @@
-<% @user.errors.full_messages.each do |message| %>
-    <div class="form-error">
-      <%= message %>
-    </div>
-  <% end %>
-  
-<p>ユーザー編集</p>
-<%= form_with model:@user,local:true do |form| %>
-<p>ユーザー名</p>
-<%= form.text_field :name %>
-<p>自己紹介</p>
-<%= form.text_area :introduction %>
-<p>画像</p>
-<%= form.file_field :avator %>
-<%= form.submit %>
-<%end%>
+<div class="post_page_container">
 
+<% @user.errors.full_messages.each do |message| %>
+  <div class="form-error">
+    <%= message %>
+  </div>
+<% end %>
+
+<p class="post_new_page_letter">編集してみよう！</p>
+<%= form_with model:@user,local:true do |form| %>
+
+  <div class="new_title">
+  <p>ユーザー名</p>
+  <%= form.text_field :name %>
+  </div>
+
+
+  <div class="new_description" id="user_edit_description">
+  <p>自己紹介</p>
+  <%= form.text_area :introduction %>
+  </div>
+
+
+  <div class="new_img">  
+  <p>写真 (jpg形式)</p>
+  <label>
+  <i class="fas fa-camera"></i> 選択
+  <%= form.file_field :avator, id:"post_img", accept: "image/*"%>
+  </label>
+  </div>
+  <span id="result_clear">選択をクリアする</span>
+  <div id="result_post"></div>
+
+
+
+  <div class="user_login_button post_new_submit">
+    <%= form.submit "更新する"%>
+  </div>
+  
+  
+
+  <%end%>
+
+
+
+
+  <div class="logout_wrapper"><%=link_to("ログアウト","/users/logout",method: :post,id:"logout_button")%></div>
+  </div>
+
+
+
+
+  <script>
+
+  $('#post_img').change(function(){
+    $('img').remove();
+    var file = $(this).prop('files')
+    $(file).each(function(index) {
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(file[index]);
+    fileReader.onloadend = function() {
+      $("#result_post").append('<a href="' + fileReader.result + '" rel="lightbox" data-lightbox="group"><img src="' + fileReader.result + '"/></a>');
+      $("#result_clear").show();
+    }
+    });
+  });
+
+  $("#result_clear").click(function(){
+    $("#result_post").html("");
+    $("#post_img").val("");
+    $("#result_clear").hide();
+  });
+  
+  </script>

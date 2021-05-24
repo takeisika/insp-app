@@ -1,0 +1,91 @@
+<p class="following_title">メッセージ一覧</p>
+
+<div class="following_container">
+<%@talks=Talk.where(my_id: @current_user.id).or(Talk.where(your_id: @current_user.id)).order(id: :DESC).select(:my_id,:your_id).distinct%>
+
+<%if Talk.where(my_id: @current_user.id).or(Talk.where(your_id: @current_user.id)).count>=1%>
+
+<%@array=[]%>
+
+
+
+<%@talks.each do |talk|%>
+
+<%if talk.my_id==@current_user.id%>
+<%@user=User.find_by(id: talk.your_id)%>
+<%elsif talk.your_id==@current_user.id%>
+<%@user=User.find_by(id: talk.my_id)%>
+<%end%>
+
+
+<%if @user%>
+<%@array=@array.push(@user.name)%>
+<%if @array.count - @array.uniq.count <= 0%>
+
+
+  <%= link_to("/talks/#{@user.id}")do %>
+  <div id="messages_user_index">
+  <div id="messages_user_left">
+  <div id="messages_user_img">
+    <%if @user.avator.attached?%>
+       <%=image_tag(@user.avator)%>
+    <%else%>
+       <%=image_tag "/default.jpg"%>
+    <%end%>
+    </div>
+    <div id="messages_name_content">
+    <p id="messages_user_name">
+    <object><%=link_to(@user.name,"/talks/#{@user.id}")%></object>
+    </p>
+
+    <%@last_talks_me=[]%>
+    <%last_talks_me=Talk.where(my_id: @current_user.id ,your_id: @user.id)%>
+    <%@last_talks_me.concat(last_talks_me)%>
+    <%last_talks_you=Talk.where(my_id: @user.id ,your_id: @current_user.id)%>
+    <%@last_talks_me.concat(last_talks_you)%>
+    <%count=@last_talks_me.count%>
+    <%@last_talks_me = @last_talks_me.sort_by{|last_talks_me| last_talks_me.created_at}%>    
+
+    
+    <%if @last_talks_me.count>=1%>
+    
+    <%if @last_talks_me[count-1].read==nil&&@last_talks_me[count-1].your_id==@current_user.id%>
+    <p id="messages_content_unread">
+    <%if @last_talks_me[count-1].chatfile.attached?%>
+     画像
+    <%end%>        
+     <%=@last_talks_me[count-1].content.truncate(10)%>
+     <span><%=@last_talks_me[count-1].updated_at.to_s(:datetime_jp)%><span>
+     </p>
+
+     <%else%>
+     <p id="messages_content">
+     <%if @last_talks_me[count-1].chatfile.attached?%>
+     画像
+    <%end%>         
+     <%=@last_talks_me[count-1].content.truncate(10)%>
+     <span><%=@last_talks_me[count-1].updated_at.to_s(:datetime_jp)%><span> 
+     </p>    
+     <%end%>
+
+     <%end%><!--if @last_talks_me.count>=1-->
+    </div>
+
+
+  </div>
+  </div>
+  <%end%>
+  <%end%>
+  <%@array=@array.uniq%>
+  <%end%>
+ <%end%>
+
+<%else%>
+<p id="message_else">メッセージはまだありません!</p>
+<%end%>
+ </div>
+
+
+
+
+

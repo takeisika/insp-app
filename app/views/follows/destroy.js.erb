@@ -1,4 +1,7 @@
 $('.user_show_follow_button').html("<%= j(render partial: 'users/follow', locals: {user: @user}) %>");
 
+$(".following_user_right_<%=@user.id%>").html("<%= j(render partial: 'users/follow', locals: {user: @user}) %>");
+
+$('.user_show_second_<%=@user.id%>').html("<%= j(render partial: 'users/follow_number', locals: {user: @user}) %>");
 
 $('.flash').html('<p class="flash_letter"> <%=flash[:notice]%> </p>');

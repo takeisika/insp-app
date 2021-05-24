@@ -2,14 +2,230 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 .follow_container{
-    padding-top:120px;
+    padding-top:80px;
     padding-bottom: 100px;
-    padding-left: 250px;
-    padding-right: 250px;
+    width:55%;
+    margin:0 auto;
+}
+
+.follow_index_timeline_letter{
+    text-align:center;
+    font-size:40px;
+    color:rgb(175, 175, 175);
+    margin-bottom:20px;
 }
 
 
 .follow_index_else{
     text-align:center;
+}
+
+
+.post_edit_delete_modal_button{
+    position:relative;
+    text-align:center;
+}
+
+.fa-ellipsis-h{
+    color:rgb(139, 139, 139);
+}
+
+.fa-ellipsis-h:hover{
+    background-color: rgb(196, 196, 196);
+    border-radius: 30px;
+    padding:5px;
+}
+
+
+
+.post_edit_delete_modal_open{
+    z-index:100;
+    display:none;
+    background-color:rgba(43, 43, 43, 0.356);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom:0;
+    right:0;
+}
+
+
+
+
+.post_edit_delete_modal{
+    background-color: white;
+    width:18%;
+    border-radius: 5px;
+    font-size:14px;
+    margin:0 auto;
+    display: inline-block;
+    height:138px;
+}
+
+
+#post_edit_modal_letter{
+    border-bottom: 1px solid rgb(182, 182, 182);
+    margin:0;
+    padding:13px;
+    display:block;
+    color:rgb(66, 66, 66);
+    font-weight: normal;
+}
+
+.post_delete_modal_letter{
+    border-bottom: 1px solid rgb(182, 182, 182);
+    margin:0;
+    padding:13px;
+    color:rgb(201, 77, 77);
+    font-weight: bold;
+    display:block;
+}
+
+
+#post_modal_back{
+  color:rgb(66, 66, 66);
+  margin:0;
+  padding:13px;
+}
+
+
+
+
+
+
+
+
+//hoverモーダル
+
+.index_user_name{
+    position:relative;
+}
+
+
+#hover_profile{
+    z-index:100;
+    display:none;
+    background-color: white;
+    position:absolute;
+    top:30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px #c1ced7;
+    width:350px;
+    height:auto;
+}
+
+
+.hover_top{
+    display: flex;
+}
+
+#hover_profile img{
+  width:65px;
+  height:65px;
+  margin-top:14px;
+  margin-left:5px;
+  border:none;
+}
+
+#hover_profile .user_show_left{
+    margin-right:10px;
+}
+
+
+#hover_profile .user_show_two_point_five{
+    font-size:12px;
+    margin-top:5px;
+}
+
+
+#hover_profile .user_show_name{
+    font-weight: bold;
+    color: rgb(32, 32, 32);
+    font-size:18px;
+    margin-top:4px;
+}
+
+#hover_profile .user_show_first{
+    line-height: 18px;
+    margin-top:13px;
+    margin-bottom:8px;
+}
+
+#hover_profile .post_index_follow_button{
+    padding:0;
+    margin-top:4px;
+}
+
+
+#hover_profile .user_show_message a{
+    padding:0;
+}
+
+#hover_profile .fa-envelope{
+    color:#0095f6;
+    border-radius: 25px;
+    padding:7px 4px;
+    border: solid 1px #0095f6;
+    margin-right:25px;
+}
+
+#hover_profile .follow_post_number{
+    color:black;
+    font-weight: normal;
+}
+
+
+
+#hover_profile .follow_number a{
+    font-weight: normal;
+    padding-right:3px;
+    padding-left:11px;
+}
+
+
+#hover_profile .user_show_third p{
+  margin-bottom:12px;
+  margin-right:10px;
+  font-weight: normal;
+}
+
+#hover_profile .user_show_third  a{
+    padding:0;
+    font-weight: normal;
+}
+
+
+#hover_profile .user_link{
+    margin:0;
+    padding:0;
+}
+
+#hover_profile .user_show_two_point_five{
+    font-weight: normal;
+}
+
+
+#hover_profile .follow_number{
+    color:black;
+    font-weight: normal;
+}
+
+
+
+
+@media (max-width: 670px) {
+    .user_show_two_point_five{
+        font-size:12px;
+    }
+    .post_edit_delete_modal{
+        background-color: white;
+        width:30%;
+        border-radius: 5px;
+        font-size:14px;
+        margin:0 auto;
+        display: inline-block;
+        height:138px;
+    }
 }

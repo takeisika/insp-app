@@ -1,61 +1,176 @@
+<div class="talk_container">
 <div class="talk" >
 
 
  <div class="talk_header">
-  <p class="talk_header_name"><%=user.name%></p>
- </div>
+  <p>
+  <%if @user.avator.attached?%>
+  <%=image_tag(@user.avator)%>
+  <%else%>
+  <%=image_tag "/default.jpg"%>
+  <%end%>
+  </p>
+  <p class="talk_header_name"> 
+  <%=link_to(@user.name,"/users/#{@user.id}")%> 
+  </p>
+  </div>
 
 
  <div class="talk_zone">
  <%@talks=Talk.all%>
 
 <%@talks.each do |talk|%>
-    <%if (@current_user.id==talk.my_id&&user.id==talk.your_id)||(@current_user.id==talk.your_id&&user.id==talk.my_id)%>
+  <%if (@current_user.id==talk.my_id&&@user.id==talk.your_id)||(@current_user.id==talk.your_id&&@user.id==talk.my_id)%>
+
     <%@submit_user=User.find_by(id: talk.my_id)%>
 
      <%if @submit_user.id==@current_user.id%>
      
       <div class="talk_submit_user">
-       <p class="talk_submit_user_content">
-         <%=talk.content%>
-       </p>
-       </div>
+
+      <%if talk.read=="read"%> 
+
+       <%if talk.chatfile.attached?%>
+           <div id="chat_file">
+             <object><%= link_to image_tag(talk.chatfile),talk.chatfile, :rel => "lightbox" %></object>
+           </div>
+             <p class="talk_submit_user_content_time"><i class="far fa-eye" id="talk_read"></i><%=talk.updated_at.to_s(:datetime_jp)%></p>              
+        <%else%> 
+              <p class="talk_submit_user_content"><%=talk.content%></p>
+              <p class="talk_submit_user_content_time"><i class="far fa-eye" id="talk_read"></i><%=talk.updated_at.to_s(:datetime_jp)%></p>             
+        <%end%>
+        <%else%><!--if talk.read=="read"-->
+        <%if talk.chatfile.attached?%>
+           <div id="chat_file">
+             <object><%= link_to image_tag(talk.chatfile),talk.chatfile, :rel => "lightbox" %></object>
+           </div>
+             <p class="talk_submit_user_content_time"><%=talk.updated_at.to_s(:datetime_jp)%></p>
+        <%else%>
+              <div class="talk_submit_user_content"><%=talk.content%></div>
+              <p class="talk_submit_user_content_time"><%=talk.updated_at.to_s(:datetime_jp)%></p>
+        <%end%> 
+               
+      <%end%><!--if talk.read=="read"-->
+
+      </div>
+
      <%else%>
-       
+
+     
         <div class="talk_receive_user">
-         <%if user.avator.attached?%>
-           <object><%= link_to image_tag(user.avator),user.avator, :rel => "lightbox" %></object>
+
+        <%if talk.read=="read"%>
+
+         <%if @user.avator.attached?%>
+           <%=image_tag(@user.avator)%>
          <%else%>
-           <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
+           <%=image_tag "/default.jpg"%>
          <%end%>
 
-        
-         <p class="talk_receive_user_content">
-          <%=talk.content%>
-         </p>
-        </div>
-        
-     <%end%>
+         <%if talk.chatfile.attached?%>
+            <div id="chat_file">
+              <object><%= link_to image_tag(talk.chatfile),talk.chatfile, :rel => "lightbox" %></object>
+            </div>
+              <p class="talk_receive_user_content_time"><%=talk.updated_at.to_s(:datetime_jp)%></p>
+         <%else%>
+               <p class="talk_receive_user_content"><%=talk.content%></p>
+               <p class="talk_receive_user_content_time"><%=talk.updated_at.to_s(:datetime_jp)%></p>
+         <%end%>
+         
+        <%elsif talk.read==nil%>
 
-    <%end%>
-<%end%>
+         <%if @user.avator.attached?%>
+           <%=image_tag(@user.avator)%>
+         <%else%>
+           <%=image_tag "/default.jpg"%>
+         <%end%>
+
+         <%if talk.chatfile.attached?%>
+            <div id="chat_file">
+              <object><%= link_to image_tag(talk.chatfile),talk.chatfile, :rel => "lightbox" %></object>
+            </div>
+              <p class="talk_receive_user_content_time"><%=talk.updated_at.to_s(:datetime_jp)%></p>
+         <%else%>
+               <p class="talk_receive_user_content"><%=talk.content%></p>
+               <p class="talk_receive_user_content_time"><%=talk.updated_at.to_s(:datetime_jp)%></p>
+         <%end%> 
+
+         <%talk.read="read"%>
+         <%talk.save%>        
+
+        <%end%><!--elsif talk.read==nil-->
+        </div>       
+        
+     <%end%><!--if @submit_user.id==@current_user.id-->
+
+    <%end%><!--if (@current_user.id==talk.my_id&&@user.id==talk.your_id)||(@current_user.id==talk.your_id&&@user.id==talk.my_id)-->   
+
+<%end%><!--each-->
+
 </div>
 
 
 <div class="comment_button_text_area comment_button_text_area_message">
-  <%=form_tag("/talks/#{user.id}/create",method: :post,remote: true)do%>
+<%= form_with model:@talk,local:true,remote: true,id:"talk_submit" do |form| %>
 
-  <input type="text" name="content" class="comment_text_area" placeholder="メッセージを入力">
-  <input type="submit" value="&#xf3e5" class="comment_toukou_button fas fa-lg">
-  <%end%>
+  <div class="talk_file">
+  <label>
+  <i class="fas fa-camera"></i>
+  <%= form.file_field :chatfile,id:"talk_file" %>
+  </label>
   </div>
 
+  <%= form.text_field :content,class:"comment_text_area",placeholder:"メッセージを入力",autocomplete:"off",id:"talk_content_form"%>
 
+  <%= form.hidden_field :your_id,value:@user.id %>
 
+  <%= form.hidden_field :my_id,value:@current_user.id %>
+
+  <%= form.submit "送信する",class:"comment_toukou_button"%>
+
+<%end%>
+</div>
 
 
 </div>
+</div>
 
+
+
+
+
+<script>
+$('.talk_zone').animate({ scrollTop: $('.talk_zone')[0].scrollHeight},10);
+
+$(".comment_toukou_button").css('opacity',0.5);
+$(".comment_toukou_button").attr('disabled', true);
+$(".comment_toukou_button").css('cursor','default');
+
+$('#talk_content_form').on('input', function(){
+  var input_text = $(this).val();
+  if(input_text==""){
+    $(".comment_toukou_button").css('opacity',0.5)
+    $(".comment_toukou_button").attr('disabled', true);
+    $(".comment_toukou_button").css('cursor','default');  
+    $(".talk_file").css('display','block');  
+  }else{
+    $(".comment_toukou_button").css('opacity',1)
+    $(".comment_toukou_button").attr('disabled', false);
+    $(".comment_toukou_button").css('cursor','pointer');
+    $(".talk_file").css('display','none');      
+  }
+});
+
+
+
+
+$('#talk_file').change(function(){
+  $('#talk_submit').submit();
+});
+
+
+
+</script>
 
 
 

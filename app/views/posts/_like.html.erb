@@ -1,17 +1,17 @@
 <%if @current_user%>
 
-
-<% if Like.find_by(user_id: @current_user.id, post_id: post.id) %>
-        <object><%= link_to("/likes/#{post.id}/destroy",method: :post,remote: true) do %>
+<% @like=Like.find_by(user_id: @current_user.id, post_id: post.id) %>
+<%if @like%>
+        <object><%= link_to("/posts/#{post.id}/likes/#{@like.id}",method: :delete,remote: true) do %>
           <span class="fa fa-heart like-btn-unlike fa-xs"><%=Like.where(post_id:post.id).count%></span>
         <% end %></object>
       <% else %>
-        <object><%= link_to("/likes/#{post.id}/create", method: :post,remote: true) do %>
+        <object><%= link_to("/posts/#{post.id}/likes", method: :post,remote: true) do %>
           <span class="fa fa-heart like-btn fa-xs"><%=Like.where(post_id:post.id).count%></span>
         <% end %></object>
       <% end %>
 <%else%>
-        <object><%= link_to("/likes/#{post.id}/destroy",method: :post,remote: true) do %>
+        <object><%= link_to("/posts/#{post.id}/likes",method: :post,remote: true) do %>
           <span class="fa fa-heart like-btn-unlike fa-xs"><%=Like.where(post_id:post.id).count%></span>
         <% end %></object>
 <%end%>

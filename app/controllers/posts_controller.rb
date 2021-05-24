@@ -3,10 +3,9 @@ class PostsController < ApplicationController
   before_action:postensure,{only:[:edit,:update,:destroy]}
 
   def index
-
   end
 
-  def _form
+  def new
     @post=Post.new
   end
 
@@ -16,24 +15,11 @@ class PostsController < ApplicationController
 
     if @post.save
       flash[:notice]="投稿しました"
-
-
-      if @post.files.count>4
-        @post.destroy
-        render("posts/_form")
-      else
-        redirect_to("/follows/index")
-      end
-
+      redirect_to("/follows")
+    else
+      render("posts/new")
     end
-
-   
-
-
-
-
-
-
+    
   end
 
   
@@ -50,7 +36,7 @@ class PostsController < ApplicationController
 
     if @post.update(post_params)
     flash[:notice]="編集しました"
-    redirect_to("/follows/index")
+    redirect_to("/")
     else
       render("posts/edit")
     end
@@ -59,13 +45,21 @@ class PostsController < ApplicationController
   def destroy
     @post=Post.find_by(id: params[:id])
     @post_id=@post.id
+    @tags=Hashtag.where(post_id: @post.id)
+    @tags.destroy_all
+    if @post.files.attached?
+      @post.files.purge
+    end
+    if @post.movies.attached?
+      @post.movies.purge
+    end
     @post.destroy
     @likes=Like.where(post_id: params[:id],user_id: @current_user.id)
     @likes.destroy_all
-    @tags=Hashtag.where(post_id: @post.id)
-    @tags.destroy_all
+    @comments=Comment.where(post_id: @post.id)
+    @comments.destroy_all
     flash.now[:notice]="削除しました"
-    
+    @user=User.find_by(id: @post.user_id)
   end
 
   def destroy_at_comment
@@ -74,7 +68,7 @@ class PostsController < ApplicationController
     @likes=Like.where(post_id: params[:id],user_id: @current_user.id)
     @likes.destroy_all
     flash[:notice]="削除しました"
-    redirect_to("/follows/index")
+    redirect_to("/follows")
   end
 
   def postensure
@@ -91,8 +85,10 @@ class PostsController < ApplicationController
 
   def come
     @post=Post.find_by(id: params[:id])
-    @comment=Comment.new(comment_id: params[:id],content: params[:content],user_id:@current_user.id)
+    @comment=Comment.new(post_id: params[:id],content: params[:content],user_id:@current_user.id,comment_id:params[:comment_id])
     @comment.save
+    @notification=Notification.new(visitor_id: @current_user.id,visited_id: @post.user_id,post_id: @post.id,comment_id: @comment.id,action:"comment")
+    @notification.save
   end
 
 

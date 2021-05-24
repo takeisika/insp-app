@@ -1,76 +1,71 @@
 Rails.application.routes.draw do
 
+  get 'notifications/index'
+  get 'messages/index'
+  get "/"=>"follows#index"
 
+  resources:posts do
+    resources:comments do
+      resources:likecomments, only: [:create, :destroy]
+    end
+    resources:likes
 
-  post "likecomments/:comment_id/create"=>"likecomments#create"
-  post "likecomments/:comment_id/destroy"=>"likecomments#destroy"
+    collection do
+      get :search_form
+    end
 
-
-  get "posts/search_form"=>"posts#search_form"
-  get "users/guest_form"=>"users#guest_form"
-  post "users/guest"=>"users#guest"
-
-  
-  get 'hashtags/show'
-  get "follows/index"=>"follows#index"
-  post 'follows/:followed_id/create'=>"follows#create"
-  post 'follows/:followed_id/destroy'=>"follows#destroy"
-  
-
-
-  get "hashtags/:id"=>"hashtags#show"
-
-
-  post "talks/:your_id/create"=>"talks#create"
-  get "talks/:your_id"=>"talks#show"
-
+    member do
+      get :comment
+      post :come
+      post :destroy_at_comment
+      get :like_user_index
+    end
+  end
 
 
 
-  post "logout"=>"users#logout"
-  post "likes/:post_id/create"=>"likes#create"
-  post "likes/:post_id/destroy"=>"likes#destroy"
-  
-  get 'likes/create'
-
-  get "home/about"=>"home#about"
-
-
-  get 'users/index'=>"users#index"
-  get "users/new"=>"users#new"
-  post "users/create"=>"users#create"
-  get "users/login_form" =>"users#login_form"
-  post "users/login"=>"users#login"
-  get "users/:id"=>"users#show"
-  get "users/:id/likes"=>"users#likes"
-  get "users/:id/edit"=>"users#edit"
-  post "users/:id/update"=>"users#update"
-
-  
-
-  get "posts/_form"=>"posts#_form"
-  get "posts/index"=>"posts#index"
-  post "posts/create"=>"posts#create"
-  get "posts/:id/edit"=>"posts#edit"
-  post "posts/:id/update"=>"posts#update"
-  post "posts/:id/destroy"=>"posts#destroy"
-  post "posts/:id/destroy_at_comment"=>"posts#destroy_at_comment"
-  get "posts/:id"=>"posts#show"
-  get "posts/:id/comment"=>"posts#comment"
-  post "posts/:id/come"=>"posts#come"
-  
 
 
 
-  get "comments/:id/edit"=>"comments#edit"
-  post "comments/:id/update"=>"comments#update"
-  post "comments/:id/destroy"=>"comments#destroy"
-  
-  
+  resources :users do
+    member do
+      get :likes
+      get :followings
+      get :followers
+      get :followers_you_follow
+    end
 
-  get 'home/top'
-  get "/"=>"posts#index"
-  resources :users
-  resources :posts
+    resources:follows, only:[:index, :create, :destroy]
+
+
+    collection do
+      get :login_form
+      post :login
+      post :logout
+      get :guest_form
+      post :guest
+    end
+
+  end
+
+  resources:likes, only: [:create, :destroy]
+
+  resources:hashtags, only: [:show]
+
+  resources:follows, only:[:index, :create, :destroy]
+
+  resources:talks
+
+  resources:messages, only: [:index]
+
+  resources:notifications
+
+  resources:home do
+    collection do
+      get :about
+      get :top
+    end
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

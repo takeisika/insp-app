@@ -1,2 +1,2 @@
 
-<span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: post.id).count%></span>
+<span class="fas fa-comment fa-xs"><%=Comment.where(post_id: post.id).count%></span>

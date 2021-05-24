@@ -9,13 +9,10 @@ html{
 
 
 
-
-
-
 //いいね取り消し
 .like-btn {
   color: #8899a6;
-  padding-left:6px;
+  padding-left:3px;
 }
 
 .fa-heart:before{
@@ -32,7 +29,7 @@ html{
 //いいね追加
 .like-btn-unlike {
   color: #ff2581;
-  padding-left:6px;
+  padding-left:3px;
 }
 
 
@@ -68,12 +65,30 @@ html{
 }
 
 
+
 .container{
   padding-top:100px;
   padding-bottom: 100px;
-  padding-left: 250px;
-  padding-right: 250px;
+  width:55%;
+  margin:0 auto;
 }
+
+@media (max-width: 670px) {
+  .follow_container {
+    width: 100%;
+  }
+  .title_insp{
+    padding-left:30px;
+  }
+  .container{
+    width: 100%;
+  }
+
+  table{
+    width: 100%;
+  }
+}
+
 
 .index {
   height:auto;
@@ -81,11 +96,11 @@ html{
   background-color: white;
   padding-top: 20px;
   padding-bottom: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
   display:flex;
   justify-content: space-between;
   margin: 0 0 -1px; 
+  width:100%;
+  box-sizing: border-box;
 }
 
 .index:hover{
@@ -94,17 +109,22 @@ html{
 
 .index_right_left{
   display: flex;
-  width:92%;
+  width:100%;
 }
 
 .index_left{
-  padding-right:12px;
+  padding-left:15px;
   text-align: center;
   width:7%;
 }
 
 
 .index_header{
+  display:flex;
+  justify-content: space-between;
+}
+
+.index_header_left{
   display:flex;
 }
 
@@ -116,11 +136,10 @@ html{
   width: 50px;
   height: 50px;
   padding-bottom: 10px;
+  object-fit: cover;
 }
 
-.index_gazo img:hover{
-  opacity:0.8;
-}
+
 
 .index_likes_comments{
   display:flex;
@@ -129,6 +148,7 @@ html{
 
 
 .index_header a{
+  vertical-align: top;
   margin:0;
   font-weight: bold;
   font-size:12px;
@@ -137,9 +157,7 @@ html{
 }
 
 
-.index_user_name a:hover{
-  text-decoration: underline;
-}
+
 
 .index_header p{
   margin:0;
@@ -188,10 +206,7 @@ html{
   font-size:12px;
 }
 
-.comment_edit a{
-  text-decoration: underline;
-  color:grey;
-}
+
 
 
 
@@ -219,8 +234,8 @@ html{
 
 
 .comment_text_area{
-  width:94%;
   border: none;
+  width:100%;
 }
 
 .comment_text_area:focus {
@@ -232,6 +247,7 @@ html{
   border: none;
   background-color: white;
   color: #0095f6;
+  font-weight: bold;
 }
 
 .comment_toukou_button:hover{
@@ -266,6 +282,8 @@ table {
   margin: 0 auto;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+
 
 table a:hover{
   opacity:0.6;
@@ -336,40 +354,170 @@ td{
 }
 
 
-.index_right_file{
-  text-align: center;
-}
+
 
 
 .index_right img{
-  border-radius: 10px;
-  border: solid 3px rgb(218, 217, 217);
+  border: solid 1px rgb(218, 217, 217);
   margin-top:30px;
   margin-bottom:35px;
 }
 
-.index_right img:hover{
-  opacity:0.8;
+
+
+.index_gazo img:hover{
+  opacity:0.7;
 }
 
-.one img{
-  width:60%;
-  height:300px;
+
+
+
+
+
+//画像表示
+.files_wrap{
+  width:85%;
+  display: flex;
+  margin:0 auto;
+  border: solid 1px rgb(199, 199, 199);
+  border-radius: 30px;
+  overflow: hidden;
+  margin-top:25px;
+  margin-bottom:35px;
 }
 
-.two img{
-  width:30%;
-  height:300px;
+
+//画像表示１枚
+#file1_0{
+  width:100%;
+  height:350px;
 }
 
-.three img{
-  width:20%;
-  height:300px;
+#file1_0 img{
+  border:none;
+  width:100%;
+  object-fit: cover;
+  vertical-align: top;
+  height:100%;
+  margin:0;
 }
 
-.four img{
-  width:15%;
-  height:300px;
+
+//画像表示２枚
+#file2_0{
+  width:50%;
+  height:350px;
+  margin-right: 2px;
+}
+
+
+#file2_0 img{
+  border:none;
+  width:100%;
+  object-fit: cover;
+  margin-top:0;
+  margin-bottom:0;
+  margin-left:0;
+  vertical-align: top;
+  height:100%;
+}
+
+
+#file2_1{
+  width:50%;
+  height:350px;
+}
+
+#file2_1 img{
+  border:none;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  vertical-align: top;
+  margin:0;
+}
+
+//画像表示３枚
+#file3_0{
+  width:50%;
+  height:350px;
+  margin-right: 2px;
+}
+
+#file3_0 img{
+  border:none;
+  width:100%;
+  object-fit: cover;
+  margin-top:0;
+  margin-bottom:0;
+  margin-left:0;
+  vertical-align: top;
+  height:100%;
+}
+
+#file3_12{
+  width:50%;
+  height:350px;
+}
+
+#file3_12 img{
+  border:none;
+  width:100%;
+  height:50%;
+  object-fit: cover;
+  vertical-align: top;
+  margin:0;
+}
+
+#file3_1 img{
+  margin-bottom:2px;
+}
+
+//画像表示４枚
+#file4_01{
+  width:50%;
+  height:350px;
+  margin-right: 2px;
+}
+
+#file4_01 img{
+  border:none;
+  width:100%;
+  height:50%;
+  object-fit: cover;
+  vertical-align: top;
+  margin:0;
+}
+
+#file4_1 img{
+  margin-bottom:2px;
+}
+
+#file4_23{
+  width:50%;
+  height:350px;
+}
+
+#file4_23 img{
+  border:none;
+  width:100%;
+  height:50%;
+  object-fit: cover;
+  vertical-align: top;
+  margin:0;
+}
+
+#file4_3 img{
+  margin-bottom:2px;
+}
+
+#file1_0 video{
+  border:none;
+  width:100%;
+  object-fit: cover;
+  vertical-align: top;
+  height:100%;
+  margin:0;
 }
 
 
@@ -387,36 +535,18 @@ td{
   opacity:0.8;
 }
 
-.one video{
-  width:60%;
-  height:300px;
-}
 
-.two video{
-  width:30%;
-  height:300px;
-}
 
-.three video{
-  width:20%;
-  height:300px;
-}
-
-.four video{
-  width:15%;
-  height:300px;
+#file1_0 iframe{
+  border:none;
+  width:100%;
+  object-fit: cover;
+  vertical-align: top;
+  height:100%;
+  margin:0;
 }
 
 
-
-
-.index_right iframe{
-  width:60%;
-  height:300px;
-  margin-top:30px;
-  border-radius: 10px;
-  border: solid 3px rgb(218, 217, 217);
-}
 
 .index_right iframe:hover{
   opacity:0.8;
@@ -432,9 +562,7 @@ td{
 
 
 
-.form_button{
-  padding-top:120px;
-}
+
 
 .form_button input{
   background-color:rgb(0, 132, 255);
@@ -450,6 +578,7 @@ td{
 
 .tag a{
   color:rgb(0, 119, 255);
+  padding-left:5px;
 }
 
 .tag a:hover{
@@ -480,14 +609,6 @@ td{
 
 
 
-//投稿ページ
-
-.post_toukou form{
-  margin-top:70px;
-}
-
-
-
 
 
 
@@ -506,11 +627,275 @@ td{
 }
 
 
-
-
-
-
-
 .comment_index:hover{
   background-color:white;
 }
+
+//投稿ページ
+
+.post_page_container{
+  padding-top:110px;
+  padding-bottom: 100px;
+  width:50%;
+  margin:0 auto;
+}
+
+.post_page_container p{
+  margin-top:5px;
+  margin-bottom:5px;
+}
+
+
+
+.new_title textarea{
+  width:100%;
+  height:50%;
+  box-sizing: border-box;
+  border:none;
+  resize: none;
+  border: solid 1px rgb(218, 217, 217);
+  margin-bottom:15px;
+}
+
+.new_title textarea:focus{
+  outline:none;
+}
+
+
+
+
+.new_description textarea{
+  height:50%;
+  width:100%;
+  box-sizing: border-box;
+  margin:0 auto;
+  border:none;
+  resize: none;
+  border: solid 1px rgb(218, 217, 217);
+  margin-bottom:15px;
+}
+
+.new_description textarea:focus{
+  outline:none;
+}
+
+
+
+.new_url input{
+  width:100%;
+  box-sizing: border-box;
+  display: inline-block;
+  margin:0 auto;
+  border:none;
+  border: solid 1px rgb(218, 217, 217);
+  margin-bottom:15px;
+}
+
+
+.new_url input:focus{
+  outline:none;
+}
+
+.new_tag input{
+  width:100%;
+  box-sizing: border-box;
+  display: inline-block;
+  margin:0 auto;
+  border:none;
+  border: solid 1px rgb(218, 217, 217);
+  margin-bottom:15px;
+}
+
+.new_tag input:focus{
+  outline:none;
+}
+
+
+
+
+
+
+
+
+
+
+.post_edit_page_letter,.post_new_page_letter{
+  text-align:center;
+  font-size:40px;
+  color:rgb(175, 175, 175);
+  margin-bottom:10px;
+}
+
+
+
+#result_post img{
+  width:150px;
+  height:180px;
+  vertical-align: top;
+  margin:10px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+#result_video video{
+  width:150px;
+  height:180px;
+  vertical-align: top;
+  margin:10px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+
+#post_img{
+  margin-top:10px;
+  margin-bottom:5px;
+}
+
+#post_video{
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.post_new_submit{
+  text-align:center;
+}
+
+.post_new_submit input{
+  width:100%;
+  padding:10px;
+  border:none;
+  background-color: #3b98f0;
+  color:white;
+  font-weight: bold;
+}
+
+
+.index_right_file{
+  text-align: center;
+}
+
+
+.index_right_file a{
+  color:#0077ff;
+  font-size:15px;
+}
+
+.index_right_file_url{
+  text-align: left;
+}
+
+.index_right_file_url a{
+  color:#0077ff;
+  font-size:12px;
+  padding-left: 5px;
+}
+
+.index_setu a{
+  padding-left: 5px;
+}
+
+
+.new_img input{
+  display:none;
+}
+
+.new_img label{
+  color:rgb(46, 46, 46);
+  background-color:rgb(233, 233, 233);
+  padding:0 5px;
+  border: solid 1px rgb(180, 180, 180);
+  display: inline-block;
+  margin-top:10px;
+  margin-bottom:10px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.new_movie input{
+  display:none;
+}
+
+.new_movie label{
+  color:rgb(46, 46, 46);
+  background-color:rgb(233, 233, 233);
+  padding:0 5px;
+  border: solid 1px rgb(180, 180, 180);
+  display: inline-block;
+  margin-top:10px;
+  margin-bottom:10px;
+  font-size:14px;
+  cursor: pointer;
+}
+
+
+.user_name_link:hover{
+  text-decoration: underline;
+}
+
+
+
+#result_clear{
+  display: none;
+  font-size:12px;
+  text-decoration: underline;
+  color:#0077ff;
+  cursor: pointer;
+}
+
+
+
+#hover_profile .user_show_img img:hover{
+  opacity:0.7;
+}
+
+
+
+
+
+
+@media (max-width: 670px) {
+  table {
+    border-collapse: collapse;
+    text-align:center;
+    width:100%;
+    margin: 0 auto;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  #post_index_container{
+    padding-top:30px;
+  }
+  #ranking_render{
+    margin-top:100px;
+    background-color: rgb(250, 249, 249);
+  }
+  .post_page_container{
+    padding-top:100px;
+    padding-bottom: 100px;
+    width:80%;
+    margin:0 auto;
+  }
+  .search_form_text{
+    width:50%;
+  }
+  .search_form{
+    text-align:center;
+    margin-top:40px;
+  }
+  .index_left{
+    padding-left:15px;
+    text-align: center;
+    width:12%;
+  }
+  .index_gazo img{
+    width: 50px;
+    height: 50px;
+    padding-bottom: 10px;
+    object-fit: cover;
+  }
+  .index_right{
+    width:88%;
+  }
+}
+
+

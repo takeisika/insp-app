@@ -1,25 +1,38 @@
+<div class="post_page_container">
+
 <% @post.errors.full_messages.each do |message| %>
-    <div class="edit-error">
-      <%= message %>
-    </div>
-  <% end %>
-<p>編集してみよう!</p>
-
-
-<%= form_with model:@post,local:true do |form| %>
-  <p>フレーズ</p>
-  <%= form.text_field :title %>
-  <p>説明</p>
-  <%= form.text_area :content %>
-  <p>画像</p>
-  <%= form.file_field :files,multiple: true %>
-  <p>動画</p>
-  <%= form.file_field :movies,multiple: true %>
-  <p>URL(Youtube)</p>
-  <%= form.text_field :tube %>
-  <p>タグ</p>
-  <%= form.text_field :tag %>
-  <div class="form_button">
-  <%= form.submit %>
+  <div class="form-error">
+    <%= message %>
   </div>
+<% end %>
+
+
+<p class="post_edit_page_letter">編集してみよう！</p>
+<%= form_with model:@post,local:true do |form| %>
+
+  <div class="new_title">
+  <p>タイトル</p>
+  <%= form.text_area :title,placeholder:"タイトル入力（必須）"%>
+  </div>
+
+
+  <div class="new_description">
+  <p>説明</p>
+  <%= form.text_area :content ,placeholder:"動画の内容を説明しよう!"%>
+  </div>
+
+
+  <div class="new_tag">
+  <p>タグ</p>
+  <%= form.text_field :tag ,placeholder:"先頭に#をつけて入力"%>
+  </div>
+
+
+  <div class="user_login_button post_new_submit">
+    <%= form.submit "更新する"%>
+  </div>
+
+
+
   <%end%>
+  </div>

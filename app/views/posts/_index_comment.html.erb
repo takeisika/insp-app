@@ -1,10 +1,7 @@
-
-
-
 <div class="comment_button_text_area">
 <%=form_tag("/posts/#{post.id}/come",method: :post,remote: true)do%>
-<input type="text" name="content" class="comment_text_area" placeholder="コメントしよう！">
-<input type="submit" value="&#xf3e5" class="comment_toukou_button fas fa-lg">
+<input type="text" name="content" class="comment_text_area" placeholder="コメントしよう！" autocomplete="off">
+<input type="submit" value="投稿する" class="comment_toukou_button">
 <%end%>
 </div>
 
@@ -12,12 +9,14 @@
 
 
 
-<% @comments=Comment.where(comment_id: post.id)%>
-    <%if @comments.count>=1%>
-    <div class="comment_index_show">
-      <%@comments.each do |comment|%>
-<% @user=User.find_by(id: comment.user_id) %>
-<div class="index_comment_name_content_edit">
+<% @comments=Comment.where(post_id: post.id)%>
+<%if @comments.count>=1%>
+  <div class="comment_index_show">
+    <%@comments.each do |comment|%>
+        <%if comment.comment_id==nil%>
+         <div class="index_comment_<%=comment.id%>">
+          <% @user=User.find_by(id: comment.user_id) %>
+            <div class="index_comment_name_content_edit">
 
    <div class="index_comment_name_content">
 
@@ -31,9 +30,9 @@
         <span class="index_comment_name"><%=link_to(@user.name,"/users/#{@user.id}")%></span>
     
 
-        <div class="comment_content">
+     <div class="comment_content">
      <%if @current_user&&@current_user.id==comment.user_id%>
-       <%=link_to(comment.content,"/comments/#{comment.id}/edit") %>
+     <span><%=comment.content%></span>
      <%else%>
      <span class="index_comment_content"><%=comment.content%></span>
      <%end%>
@@ -42,25 +41,186 @@
      <p class="comment_time">
        <%=comment.created_at.to_s(:datetime_jp)%>
         <span id="comment_likes_buttons_<%= comment.id %>">
-          <%= render partial: 'comment_like', locals: { comment: comment} %>
+          <%= render partial: 'comment_like', locals: { comment: comment, post: post} %>
         </span>
-     </p>
-     </div>
-
-     
-   </div>
+        <span class="reply_button">返信する</span>
+     </p>    
+     </div>        
+   </div> 
 
    <%if @current_user%>
    <%if @current_user.id==@user.id%>
    <div class="index_comment_edit_delete">
-       <%=link_to("編集","/comments/#{comment.id}/edit")%>
-       <%=link_to("削除","/comments/#{comment.id}/destroy",method: :post,remote: true)%>
-   </div>
+       <%=link_to("編集","/posts/#{comment.post_id}/comments/#{comment.id}/edit")%>
+       <%=link_to("削除","/posts/#{comment.post_id}/comments/#{comment.id}",method: :delete,remote: true)%>
+   </div>   
    <%end%>
    <%end%>
 </div>
+
+<div class="comment_reply_form">
+<%@replycomment_user_first_comment=Comment.find_by(id:comment.id)%>
+<%@replycomment_user_first=User.find_by(id:@replycomment_user_first_comment.user_id)%>
+<%=form_tag("/posts/#{post.id}/come",method: :post,remote: true,id:"reply_form")do%>
+<p class="text_reply_wrap">
+<%if @current_user.avator.attached?%>
+<%=image_tag @current_user.avator%>
+<%else%>
+<%=image_tag "/default.jpg"%>
+<%end%>
+<input type="text" name="content" class="comment_reply_text_area" placeholder="返信を入力しよう！" autocomplete="off" value="＠<%=@replycomment_user_first.name%> ">
+</p>
+<input type="hidden" name="comment_id" value="<%=comment.id%>">
+<p class="reply_button_wrap">
+<span class="comment_reply_cancel_button">キャンセル</span>
+<input type="submit" value="返信する" class="comment_reply_toukou_button">
+</p>
+<%end%>     
+</div> 
+
+   <%@replycommments=Comment.where(comment_id:comment.id)%>
+   <%if @replycommments.count>=1%>
+   <div class="reply_comment">
+   <%@replycommments.each do |replycomment|%>
+    <div class="index_comment_<%=replycomment.id%>">
+    <% @replycomment_user=User.find_by(id: replycomment.user_id) %>
+    <div class="index_comment_name_content_edit">
+    
+       <div class="index_comment_name_content">
+    
+         <%if @replycomment_user.avator.attached?%>
+          <%=image_tag @replycomment_user.avator%>
+         <%else%>
+          <%=image_tag "/default.jpg"%>
+         <%end%>
+    
+         <div class="comment_name_content">
+            <span class="index_comment_name"><%=link_to(@replycomment_user.name,"/users/#{@replycomment_user.id}")%></span>
+        
+    
+         <div class="comment_content">
+           <span><%=replycomment.content%></span>          
+         </div>
+    
+         <p class="comment_time">
+           <%=replycomment.created_at.to_s(:datetime_jp)%>
+            <span id="comment_likes_buttons_<%= replycomment.id %>">
+              <%= render partial: 'comment_like', locals: { comment: replycomment, post: post} %>
+            </span>
+            <span class="reply_button">返信する</span>
+         </p>    
+         </div>        
+       </div> 
+    
+       <%if @current_user%>
+       <%if @current_user.id==@replycomment_user.id%>
+       <div class="index_comment_edit_delete">
+           <%=link_to("編集","/posts/#{replycomment.post_id}/comments/#{replycomment.id}/edit")%>
+           <%=link_to("削除","/posts/#{replycomment.post_id}/comments/#{replycomment.id}",method: :delete,remote: true)%>
+       </div>   
+       <%end%>
+       <%end%>
+    </div>
+    
+    <div class="comment_reply_form">
+    <%=form_tag("/posts/#{post.id}/come",method: :post,remote: true,id:"reply_form")do%>
+    <p class="text_reply_wrap">
+    <%if @current_user.avator.attached?%>
+    <%=image_tag @current_user.avator%>
+    <%else%>
+    <%=image_tag "/default.jpg"%>
+    <%end%>
+    <input type="text" name="content" class="comment_reply_reply_text_area" placeholder="返信を入力しよう！" autocomplete="off" value="＠<%=@replycomment_user.name%> "　autocomplete="off">
+    </p>
+    <input type="hidden" name="comment_id" value="<%=replycomment.comment_id%>">
+    <p class="reply_button_wrap">
+    <span class="comment_reply_cancel_button">キャンセル</span>
+    <input type="submit" value="返信する" class="comment_reply_toukou_button">
+    </p>
+    <%end%>     
+    </div> 
+    
+    </div>    
+    <%end%>
+   </div>
+   <%end%>
+</div>
+<%end%>
 <%end%>
 </div>
 <%else%>
 <p class="comment_else">コメントはまだありません！</p>
 <%end%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+$(".comment_reply_form").hide();
+
+
+$(".comment_toukou_button").css('opacity',0.5);
+$(".comment_toukou_button").attr('disabled', true);
+$(".comment_toukou_button").css('cursor','default');
+
+
+
+$('.comment_text_area').on('input', function(){
+var input_text = $(this).val();
+if(input_text==""){
+  $(".comment_toukou_button").css('opacity',0.5)
+  $(".comment_toukou_button").attr('disabled', true);
+  $(".comment_toukou_button").css('cursor','default');  
+}else{
+  $(".comment_toukou_button").css('opacity',1)
+  $(".comment_toukou_button").attr('disabled', false);
+  $(".comment_toukou_button").css('cursor','pointer'); 
+}
+});
+
+
+
+$(".comment_reply_cancel_button").click(function(){
+  var comment_reply_form=$(this).parent().parent();
+  $(comment_reply_form).hide();
+})
+
+$(".reply_button").click(function(){
+  var index_comment_name_content_edit=$(this).parent().parent().parent().parent().next();
+  var form = $(index_comment_name_content_edit).find("form");
+  $(index_comment_name_content_edit).show();
+  $(form).show();
+})
+
+$(function(){
+        $("input"). keydown(function(e) {
+            if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+    });
+</script>

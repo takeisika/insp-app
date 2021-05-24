@@ -1,0 +1,372 @@
+
+<p class="notification_title">通知一覧</p>
+
+
+<div class="notification_container">
+
+
+<%@notifications=Notification.where(visited_id:@current_user.id).where.not(visitor_id:@current_user.id).order(id: :DESC)%>
+
+<%if @notifications.count>=1%>
+
+<%@notifications.each do |notification|%>
+    <%@visitor_user=User.find_by(id: notification.visitor_id)%>
+    <%@visited_user=User.find_by(id: notification.visited_id)%>
+    <%@post=Post.find_by(id: notification.post_id)%>
+    <%@comment=Comment.find_by(id: notification.comment_id)%>
+    <%@talk=Talk.find_by(id: notification.talk_id)%>
+    <%@likecomment=Comment.find_by(id: notification.comment_id)%>
+
+
+
+
+<!--既読の場合-->
+<div>
+<%if notification.read=="read"%>
+<!--フォロ通知ー-->
+<%if notification.action=="follow"%>
+<%= link_to("/users/#{@visitor_user.id}",class: "notification_link")do %>
+<div class="notification_index">
+
+
+<div class="notification_left">
+<i class="far fa-user fa-lg"></i>
+</div>
+
+<div class="notification_right">
+<%if @visitor_user.avator.attached?%>
+   <object><%= link_to image_tag(@visitor_user.avator),@visitor_user.avator, :rel => "lightbox"%></object>
+<%else%>
+ <%=image_tag "/default.jpg"%>
+<%end%>
+
+    <p><object><%=link_to(@visitor_user.name,"/users/#{@visitor_user.id}",class:"notification_name_link")%></object>があなたをフォローしました</p>
+    <span><%=notification.updated_at.to_s(:datetime_jp)%></span>
+</div>
+
+
+</div>
+<%end%><!--リンク-->
+<%end%><!--フォローの場合-->
+
+
+
+<!--いいね通知ー-->
+<%if notification.action=="like"%>
+<%= link_to("/posts/#{@post.id}/comment",class: "notification_link")do %>
+<div class="notification_index">
+
+
+<div class="notification_left">
+<i class="fa fa-heart like-btn fa-lg" id="pink_heart"></i>
+</div>
+
+<div class="notification_right">
+<%if @visitor_user.avator.attached?%>
+ <%=image_tag @visitor_user.avator%>
+<%else%>
+   <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
+<%end%>
+
+<p><object><%=link_to(@visitor_user.name,"/users/#{@visitor_user.id}",class:"notification_name_link")%></object>があなたの投稿「<object><%=link_to(@post.title,"/posts/#{@post.id}/comment",class:"notification_title_link")%></object>」を「いいね！」しました</p>
+    <span><%=notification.updated_at.to_s(:datetime_jp)%></span>
+</div>
+
+
+</div>
+<%end%><!--リンク-->
+<%end%><!--いいねの場合-->
+
+
+
+
+
+
+
+
+<!--コメント通知ー-->
+<%if notification.action=="comment"%>
+<%= link_to("/posts/#{@post.id}/comment",class: "notification_link")do %>
+<div class="notification_index">
+
+
+<div class="notification_left">
+<i class="fas fa-comment fa-lg"></i>
+</div>
+
+<div class="notification_right">
+<%if @visitor_user.avator.attached?%>
+ <%=image_tag @visitor_user.avator%>
+<%else%>
+ <%=image_tag "/default.jpg"%>
+<%end%>
+
+<%if @comment%>
+<p><object><%=link_to(@visitor_user.name,"/users/#{@visitor_user.id}",class:"notification_name_link")%></object>があなたの投稿「<object><%=link_to(@post.title,"/posts/#{@post.id}/comment",class:"notification_title_link")%>」に「<%=@comment.content%></object>」をコメントしました</p>
+<span><%=notification.updated_at.to_s(:datetime_jp)%></span>
+</div>
+<%end%>
+
+
+</div>
+<%end%><!--リンク-->
+<%end%><!--コメントの場合-->
+
+
+
+
+
+
+<!--トーク通知ー-->
+<%if notification.action=="talk"%>
+<%= link_to("/talks/#{@visitor_user.id}",class: "notification_link")do %>
+<div class="notification_index">
+
+
+<div class="notification_left">
+<i class="far fa-envelope fa-lg"></i>
+</div>
+
+<div class="notification_right">
+<%if @visitor_user.avator.attached?%>
+ <%=image_tag @visitor_user.avator%>
+<%else%>
+ <%=image_tag "/default.jpg"%>
+<%end%>
+
+<%if @talk%>
+<p><object><%=link_to(@visitor_user.name,"/users/#{@visitor_user.id}",class:"notification_name_link")%></object>があなたにメッセージ「<%=@talk.content%>」を送信しました</p>
+<span><%=notification.updated_at.to_s(:datetime_jp)%></span>
+<%end%>
+</div>
+
+
+</div>
+<%end%><!--リンク-->
+<%end%><!--トークの場合-->
+
+
+
+
+
+
+
+
+<!--コメントいいね通知ー-->
+<%if notification.action=="likecomment"%>
+<%if @likecomment%>
+<%@notification_comment=Comment.find_by(id: notification.comment_id)%>
+<%@post=Post.find_by(id: @notification_comment.post_id)%>
+<%= link_to("/posts/#{@post.id}/comment",class: "notification_link")do %>
+<div class="notification_index">
+
+
+<div class="notification_left">
+<i class="fa fa-heart like-btn fa-lg" id="pink_heart"></i>
+</div>
+
+<div class="notification_right">
+<%if @visitor_user.avator.attached?%>
+ <%=image_tag @visitor_user.avator%>
+<%else%>
+ <%=image_tag "/default.jpg"%>
+<%end%>
+
+<p><object><%=link_to(@visitor_user.name,"/users/#{@visitor_user.id}",class:"notification_name_link")%></object>があなたのコメント「<%=@likecomment.content%>」を「いいね！」しました</p>
+<span><%=notification.updated_at.to_s(:datetime_jp)%></span>
+</div>
+
+
+</div>
+<%end%><!--リンク-->
+<%end%><!--if @likecomment-->
+<%end%><!--コメントいいねの場合-->
+
+
+
+<!--<%=notification.read%>-->
+</div>
+<%end%> <!--既読の場合-->
+
+
+
+
+<!--未読の場合-->
+<%if notification.read!="read"%>
+<div class="unread_notification">
+<!--フォロ通知ー-->
+<%if notification.action=="follow"%>
+<%= link_to("/users/#{@visitor_user.id}",class: "notification_link")do %>
+<div class="notification_index">
+
+
+<div class="notification_left">
+<i class="far fa-user fa-lg"></i>
+</div>
+
+<div class="notification_right">
+<%if @visitor_user.avator.attached?%>
+   <object><%= link_to image_tag(@visitor_user.avator),@visitor_user.avator, :rel => "lightbox"%></object>
+<%else%>
+ <%=image_tag "/default.jpg"%>
+<%end%>
+
+    <p><object><%=link_to(@visitor_user.name,"/users/#{@visitor_user.id}",class:"notification_name_link")%></object>があなたをフォローしました</p>
+    <span><%=notification.updated_at.to_s(:datetime_jp)%></span>
+</div>
+
+
+</div>
+<%end%><!--リンク-->
+<%end%><!--フォローの場合-->
+
+
+
+<!--いいね通知ー-->
+<%if notification.action=="like"%>
+<%= link_to("/posts/#{@post.id}/comment",class: "notification_link")do %>
+<div class="notification_index">
+
+
+<div class="notification_left">
+<i class="fa fa-heart like-btn fa-lg" id="pink_heart"></i>
+</div>
+
+<div class="notification_right">
+<%if @visitor_user.avator.attached?%>
+ <%=image_tag @visitor_user.avator%>
+<%else%>
+   <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
+<%end%>
+
+<p><object><%=link_to(@visitor_user.name,"/users/#{@visitor_user.id}",class:"notification_name_link")%></object>があなたの投稿「<object><%=link_to(@post.title,"/posts/#{@post.id}/comment",class:"notification_title_link")%></object>」を「いいね！」しました</p>
+    <span><%=notification.updated_at.to_s(:datetime_jp)%></span>
+</div>
+
+
+</div>
+<%end%><!--リンク-->
+<%end%><!--いいねの場合-->
+
+
+
+
+
+
+
+
+<!--コメント通知ー-->
+<%if notification.action=="comment"%>
+<%= link_to("/posts/#{@post.id}/comment",class: "notification_link")do %>
+<div class="notification_index">
+
+
+<div class="notification_left">
+<i class="fas fa-comment fa-lg"></i>
+</div>
+
+<div class="notification_right">
+<%if @visitor_user.avator.attached?%>
+ <%=image_tag @visitor_user.avator%>
+<%else%>
+ <%=image_tag "/default.jpg"%>
+<%end%>
+
+<%if @comment%>
+<p><object><%=link_to(@visitor_user.name,"/users/#{@visitor_user.id}",class:"notification_name_link")%></object>があなたの投稿「<object><%=link_to(@post.title,"/posts/#{@post.id}/comment",class:"notification_title_link")%>」に「<%=@comment.content%></object>」をコメントしました</p>
+<span><%=notification.updated_at.to_s(:datetime_jp)%></span>
+</div>
+<%end%>
+
+
+</div>
+<%end%><!--リンク-->
+<%end%><!--コメントの場合-->
+
+
+
+
+
+
+<!--トーク通知ー-->
+<%if notification.action=="talk"%>
+<%= link_to("/talks/#{@visitor_user.id}",class: "notification_link")do %>
+<div class="notification_index">
+
+
+<div class="notification_left">
+<i class="far fa-envelope fa-lg"></i>
+</div>
+
+<div class="notification_right">
+<%if @visitor_user.avator.attached?%>
+ <%=image_tag @visitor_user.avator%>
+<%else%>
+ <%=image_tag "/default.jpg"%>
+<%end%>
+
+<%if @talk%>
+<p><object><%=link_to(@visitor_user.name,"/users/#{@visitor_user.id}",class:"notification_name_link")%></object>があなたにメッセージ「<%=@talk.content%>」を送信しました</p>
+<span><%=notification.updated_at.to_s(:datetime_jp)%></span>
+<%end%>
+</div>
+
+
+</div>
+<%end%><!--リンク-->
+<%end%><!--トークの場合-->
+
+
+
+
+
+
+
+
+<!--コメントいいね通知ー-->
+<%if notification.action=="likecomment"%>
+<%if @likecomment%>
+<%@notification_comment=Comment.find_by(id: notification.comment_id)%>
+<%@post=Post.find_by(id: @notification_comment.post_id)%>
+<%= link_to("/posts/#{@post.id}/comment",class: "notification_link")do %>
+<div class="notification_index">
+
+
+<div class="notification_left">
+<i class="fa fa-heart like-btn fa-lg" id="pink_heart"></i>
+</div>
+
+<div class="notification_right">
+<%if @visitor_user.avator.attached?%>
+ <%=image_tag @visitor_user.avator%>
+<%else%>
+ <%=image_tag "/default.jpg"%>
+<%end%>
+
+<p><object><%=link_to(@visitor_user.name,"/users/#{@visitor_user.id}",class:"notification_name_link")%></object>があなたのコメント「<%=@likecomment.content%>」を「いいね！」しました</p>
+<span><%=notification.updated_at.to_s(:datetime_jp)%></span>
+</div>
+
+
+</div>
+<%end%><!--リンク-->
+<%end%><!--if @likecomment-->
+<%end%><!--コメントいいねの場合-->
+
+
+<%notification.read="read"%>
+<%notification.save%>
+<!--not read-->
+</div>
+<%end%> <!--未読の場合-->
+
+
+
+
+
+<%end%> <!--each-->
+<%else%>
+<p class="notification_else_letter">通知はありません！</p>
+<%end%>
+
+</div> <!--index-->

@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     @user=User.find_by(name: params[:username],password: params[:password])
     if @user
       session[:user_id] =@user.id
-      redirect_to("/follows/index")
+      redirect_to("/follows")
       flash[:notice]="ログインしました"
     else
       flash.now[:notice]="ユーザー名またはパスワードが間違っています"

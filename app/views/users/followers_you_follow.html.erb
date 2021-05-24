@@ -1,0 +1,55 @@
+<%@user=User.find_by(id:params[:id])%>
+<% @followers=Follow.where(followed_id: @user.id) %>
+<%if @followers.count>=1%>
+
+<% @push_other_users=[] %>
+
+　　<% @followers.each do |follower|%>
+    　<%@following_user=User.find_by(id: follower.following_id)%>
+       <%@other_follower=Follow.find_by(following_id:@current_user.id,followed_id:@following_user.id)%>
+         <% if @other_follower%>
+            <%@other_user=User.find_by(id:@other_follower.followed_id)%>
+            <%@push_other_users.push(@other_user)%>
+         <%end%>
+　　<%end%>
+
+
+
+<p class="following_title"><%=@user.name%>さんをフォローしている共通の友達</p>
+
+
+<div class="following_container">
+
+<%@push_other_users.each do |push_other_user|%>
+  <%= link_to("/users/#{push_other_user.id}",class: "link")do %>
+    <div class="following_user_index">
+    <div class="following_user_left">
+    <div class="following_user_img">
+      <%if push_other_user.avator.attached?%>
+         <%=image_tag(push_other_user.avator)%>
+      <%else%>
+         ><%=image_tag "/default.jpg"%>
+      <%end%>
+      </div>
+      <p class="following_user_name">
+      　<object><%=link_to(push_other_user.name,"/users/#{push_other_user.id}")%></object>
+      </p>
+    </div>
+    <% @follow=Follow.find_by(following_id: @current_user.id,followed_id: push_other_user.id) %>
+    <div class="following_user_right">
+    <div class="following_user_right_<%=push_other_user.id%>">
+     <%if @current_user.id!=push_other_user.id%>
+      <%if @follow%>
+        <p class="follow_button"><object><%=link_to("following","/users/#{push_other_user.id}/follows/#{@follow.id}",method: :delete,remote: true)%></object></p>
+      <%else%>
+        <p class="not_follow_button"><object><%=link_to("follow","/users/#{push_other_user.id}/follows",method: :post,remote: true)%></object></p>
+      <%end%>
+      <%end%>
+      </div>
+    </div>
+
+   </div>
+    <%end%>
+<%end%>
+<%end%>
+</div>

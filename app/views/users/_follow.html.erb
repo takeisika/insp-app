@@ -1,12 +1,9 @@
-<%if @current_user%>
+
 <%if @current_user.id!=user.id%>
-          <% @follow=Follow.find_by(following_id: @current_user.id,followed_id: user.id) %>
-             <%if @follow.nil?%>
-                <p class="not_follow_button"><%=link_to("follow","/follows/#{user.id}/create",method: :post,remote: true)%></p>
-             <%else%>
-                <p class="follow_button"><%=link_to("following","/follows/#{user.id}/destroy",method: :post,remote: true)%></p>
-             <%end%>
-<%end%>
+<% @follow=Follow.find_by(following_id: @current_user.id,followed_id: user.id) %>
+<%if @follow%>
+<p class="follow_button"><object><%=link_to("following","/users/#{user.id}/follows/#{@follow.id}",method: :delete,remote: true)%></object></p>
 <%else%>
-  <p class="not_follow_button"><%=link_to("follow","/follows/#{user.id}/create",{method: :post})%></p>
+<p class="not_follow_button"><object><%=link_to("follow","/users/#{user.id}/follows",method: :post,remote: true)%></object></p>
+<%end%>
 <%end%>

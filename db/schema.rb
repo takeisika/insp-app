@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_205909) do
+ActiveRecord::Schema.define(version: 2021_05_22_033836) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(version: 2021_04_13_205909) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "comment_id"
+    t.integer "post_id"
     t.integer "user_id"
+    t.integer "comment_id"
   end
 
   create_table "follows", force: :cascade do |t|
@@ -69,6 +70,19 @@ ActiveRecord::Schema.define(version: 2021_04_13_205909) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id"
+    t.integer "visited_id"
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.string "action"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "talk_id"
+    t.integer "likecomment_id"
+    t.string "read"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.text "content"
     t.string "title"
@@ -85,6 +99,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_205909) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "content"
+    t.string "read"
   end
 
   create_table "users", force: :cascade do |t|

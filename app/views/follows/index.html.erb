@@ -1,6 +1,6 @@
 <%@follows=Follow.where(following_id: @current_user.id)%> 
 <div class="follow_container">
-
+<p class="follow_index_timeline_letter">タイムライン</p>
 
 
 
@@ -55,17 +55,145 @@
              </div></object>
              <div class="index_comments">
               
-               <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: post.id).count%></span>
+               <span class="fas fa-comment fa-xs"><%=Comment.where(post_id: post.id).count%></span>
               
              </div>
             </div>
           </div>
      
+
           
           <div class="index_right">
            <div class="index_header">
-           <object class="index_user_name"><%=link_to(@user.name,"/users/#{@user.id}")%></object>
+           <div class="index_header_left">
+
+           <object class="index_user_name">
+             <%=link_to(@user.name,"/users/#{@user.id}",class:"user_name_link")%>
+             <div id="hover_profile">
+              <object><%= link_to("/users/#{@user.id}",class:"user_link")do %>
+              <div class="hover_top">
+
+              <div class="user_show_left">
+                 <div class="user_show_img">
+                    <%if @user.avator.attached?%>
+                       <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
+                    <%else%>
+                       <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
+                    <%end%>
+                 </div>
+              </div><!--user_left-->
+  
+  
+              <div class="user_show_right">
+                   <div class="user_show_first">
+  
+                          <p class="user_show_name"><%=@user.name%></p>
+  
+                        <div class="user_show_first_left">
+                             <%if @current_user.id==@user.id%>
+                             <object><p class="user_show_profile_edit"><%=link_to("プロフィールを編集","/users/#{@user.id}/edit")%></p></object>
+                             <%end%>
+  
+                           <div class="post_index_follow_button following_user_right_<%=@user.id%>">
+                               <%= render partial: 'users/follow' , locals: {user: @user}%>
+                           </div>
+  
+                             <%if @current_user.id!=@user.id%>
+                                <div class="user_show_message">
+                                   <object><%= link_to("/talks/#{@user.id}") do %>
+                                     <i class="far fa-envelope fa-lg"></i>
+                                   <% end %></object>
+                                </div>
+                             <%end%>
+                         </div><!--user_show_first_left-->
+  
+                   </div><!--user_show_first-->
+  
+  
+  
+  
+  
+              <div class="user_show_second user_show_second_<%=@user.id%>">
+                 <%= render partial: 'users/follow_number', locals: { user: @user} %>
+              </div>
+  
+  
+              <div class="user_show_two_point_five">
+              <%=@user.introduction%>
+              </div>
+  
+  
+  
+  
+               <div class="user_show_third">
+                   <%if @followers.count>=1%>
+  
+                         <%if @current_user.id!=@user.id%>
+                             <% @push_other_users=[] %>
+  　　                                <% @followers.each do |follower|%>
+  
+      　                                      <%@following_user=User.find_by(id: follower.following_id)%>
+                                                  <%@other_follower=Follow.find_by(following_id:@current_user.id,followed_id:@following_user.id)%>
+                                                          <% if @other_follower%>
+                                                              <%@other_user=User.find_by(id:@other_follower.followed_id)%>
+                                                              <%@push_other_users.push(@other_user.name)%>
+                                                          <%end%>
+  　　                                 <%end%>
+  
+                                            <%if @push_other_users.count==0%>
+                                               <p>フォローしている人にフォロワーはいません</p>
+                                            <%elsif @push_other_users.count==1%>
+                                               <p><object>
+                                                 <%= link_to("/users/#{@user.id}/followers_you_follow") do %>
+                                                     <span><%=@push_other_users[0]%>さん</span>がフォローしています
+                                                 <%end%> 
+                                                </object></p>                                
+                                            <%elsif @push_other_users.count==2%>
+                                               <p><object>
+                                                 <%= link_to("/users/#{@user.id}/followers_you_follow") do %>
+                                                   <span><%=@push_other_users[0]%>さん</span>、<span><%=@push_other_users[1]%>さん</span>がフォローしています
+                                                 <%end%>
+                                                </object></p>                         
+                                            <%elsif @push_other_users.count >2%>
+                                               <p><object>
+                                                  <%= link_to("/users/#{@user.id}/followers_you_follow") do %>
+                                                      <span><%=@push_other_users[0]%></span>さん、<span><%=@push_other_users[1]%></span>さん、他<span><%=@push_other_users.count-2%></span>人がフォローしています
+                                                  <%end%>                            
+                                                </object></p>
+                                            <%end%>
+                          <%end%>
+                    <%end%>
+                 </div><!--user_show_third-->
+        
+              </div><!--user_show_right-->
+           </div><!--user_show_top-->       
+           <%end%>
+           </object>         
+            </div>
+
+
+            </object>
             <p><%= post.updated_at.to_s(:datetime_jp) %></p>
+            </div>
+
+            <div class="comment_edit">
+            <%if @current_user%>
+            <%if @current_user.id==post.user_id%>
+              <div class="post_edit_delete_modal_button">
+              <span class="fas fa-ellipsis-h fa-lg"></span>
+              <div class="post_edit_delete_modal_open">
+              <div class="post_edit_delete_modal_wrapper">
+              <div class="post_edit_delete_modal">
+              <object><%=link_to("編集","/posts/#{post.id}/edit",id:"post_edit_modal_letter")%></object>
+              <object><%=link_to("削除","/posts/#{post.id}",method: :delete,remote: true,class:"post_delete_modal_letter")%></object>
+              <p id="post_modal_back">戻る</p>         
+              </div>
+              </div>
+              </div> 
+              </div>
+             <%end%>
+             <%end%>
+           </div>           
            </div>
           
         
@@ -73,10 +201,11 @@
 
     
            <div class="index_title">
-            <%=post.title%>
+           <%=Rinku.auto_link(post.title)%>
            </div>
            <div class="index_setu">
-           <p><%=post.content%></p>
+           <p><%=raw Rinku.auto_link(h(post.content))%></p>
+           </div>
 
 
 
@@ -90,7 +219,6 @@
                  <object class="tag"><%=link_to(@hash.hashname,"/hashtags/#{@hash.id}")%></object>
               <%end%>
               <%end%>            
-           </div>
            
            
     
@@ -100,57 +228,82 @@
     
            <%if post.files.attached?%>
            <%if post.files.count==1 %>
-           <% post.files.each do |file| %>
-              <object class="one"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+            <div class="files_wrap">
+             <div id="file1_0">
+              <object><%= link_to image_tag(post.files[0]),post.files[0], :rel => "lightbox" %></object>
+             </div>
+            </div>
            <%end%>
-           <%end%>
+
            <%if post.files.count==2 %>
-           <% post.files.each do |file| %>
-              <object class="two"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+           <div class="files_wrap">
+             <div id="file2_0">
+              <object><%= link_to image_tag(post.files[0]),post.files[0], :rel => "lightbox[#{post.id}]" %></object>
+             </div>
+             <div id="file2_1">
+              <object><%= link_to image_tag(post.files[1]),post.files[1], :rel => "lightbox[#{post.id}]" %></object>
+             </div>
+            </div>
            <%end%>
-           <%end%>
+
+
+
            <%if post.files.count==3 %>
-           <% post.files.each do |file| %>
-              <object class="three"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+           <div class="files_wrap">
+              <div id="file3_0">
+               <object><%= link_to image_tag(post.files[0]),post.files[0], :rel => "lightbox[#{post.id}]" %></object>
+              </div>
+              <div id="file3_12">
+               <object id="file3_1"><%= link_to image_tag(post.files[1]),post.files[1], :rel => "lightbox[#{post.id}]" %></object>
+               <object id="file3_2"><%= link_to image_tag(post.files[2]),post.files[2], :rel => "lightbox[#{post.id}]" %></object>
+              </div>
+           </div>
            <%end%>
-           <%end%>
+
+
+
+
+
+           
            <%if post.files.count==4 %>
-           <% post.files.each do |file| %>
-              <object class="four"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+           <div class="files_wrap">
+              <div id="file4_01">
+              <object id="file4_1"><%= link_to image_tag(post.files[0]),post.files[0], :rel => "lightbox[#{post.id}]" %></object>
+              <object id="file4_2"><%= link_to image_tag(post.files[1]),post.files[1], :rel => "lightbox[#{post.id}]" %></object>
+              </div>
+              <div id="file4_23">
+              <object id="file4_3"><%= link_to image_tag(post.files[2]),post.files[2], :rel => "lightbox[#{post.id}]" %></object>
+              <object id="file4_4"><%= link_to image_tag(post.files[3]),post.files[3], :rel => "lightbox[#{post.id}]" %></object>
+              </div>
+           </div>
            <%end%>
-           <%end%>
+
            <%end%>
     
+           
     
            <%if post.movies.attached?%>
-           <%if post.movies.count==1 %>
-           <% post.movies.each do |movie| %>
-              <object class="one"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-           <%end%>
-           <%end%>
-           <%if post.movies.count==2 %>
-           <% post.movies.each do |movie| %>
-              <object class="two"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-           <%end%>
-           <%end%>
-           <%if post.movies.count==3 %>
-           <% post.movies.each do |movie| %>
-              <object class="three"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-           <%end%>
-           <%end%>
-           <%if post.movies.count==4 %>
-           <% post.movies.each do |movie| %>
-              <object class="four"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-           <%end%>
-           <%end%>
+           <div class="files_wrap">
+           <div id="file1_0">
+            <object><video src="<%= rails_blob_path(post.movies[0]) %>" type="video/mp4" controls></video></object>
+           </div>
+           </div>
            <%end%>
     
     
            <%if post.tube?%>
            <%@post_tube=post.tube%>
+           <%if @post_tube.first(17)!="https://youtu.be/"%>
+           <object><p class="index_right_file_url"><%=raw Rinku.auto_link(h(@post_tube))%></p></object>
+           <%else%>
            <%@post_tube=@post_tube.last(11)%>
+           <div class="files_wrap">
+           <div id="file1_0">
            <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
-           <object class="index_right_file_url"><p><%=link_to("https://youtu.be/#{@post_tube}","https://youtu.be/#{@post_tube}")%></p></object>
+           </div>
+           </div>
+           <object><p><%=link_to("https://youtu.be/#{@post_tube}","https://youtu.be/#{@post_tube}")%></p></object>
+           <%end%>
            <%end%>
     
     
@@ -164,15 +317,8 @@
            </div>
           
     
-          
-          <div class="comment_edit">
-          <%if @current_user%>
-          <%if @current_user.id==post.user_id%>
-            <object><%=link_to("編集","/posts/#{post.id}/edit")%></object>
-            <object><%=link_to("削除","/posts/#{post.id}/destroy",method: :post,remote: true)%></object>
-           <%end%>
-           <%end%>
-         </div>
+
+
          
     
           
@@ -195,4 +341,51 @@
 
 
 </div>
+
+
+
+<script>
+
+
+
+var window_height = $(window).height();
+var modal_height = $(".post_edit_delete_modal").height();
+$(".post_edit_delete_modal").css("margin-top",((window_height - modal_height)/2) + "px");
+
+
+$(".post_edit_delete_modal_button").click(function(e){
+   $(this).find(".post_edit_delete_modal_open").fadeIn();
+   e.preventDefault();
+});
+
+
+$("#post_edit_modal_letter").click(function() {
+    window.location.href = $(this).attr('href'); 
+});
+
+
+
+$(".post_modal_back,.post_edit_delete_modal_open").click(function(e){
+   var target = $(e.target);
+   if(target.hasClass('post_delete_modal_letter')==false) {
+      $(".post_edit_delete_modal_open").fadeOut();
+      return false;
+   }
+});
+
+
+$(".index_user_name").hover(
+function(){
+  $(this).find("#hover_profile").fadeIn();
+},function(){
+   $(this).find("#hover_profile").fadeOut();
+});
+</script>
+
+
+
+
+
+
+
 

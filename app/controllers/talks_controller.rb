@@ -2,14 +2,23 @@ class TalksController < ApplicationController
   before_action:ensuring
   before_action:talk_ensure
 
-  def show
-    @user=User.find_by(id:params[:your_id])
+  def new
+    @talk=Talk.new
   end
 
+  def show
+    @talk=Talk.new
+    @user=User.find_by(id:params[:id])
+  end
+
+
   def create
-    @user=User.find_by(id:params[:your_id])
-    @talk=Talk.new(content:params[:content],my_id:@current_user.id,your_id:params[:your_id])
-    @talk.save        
+    @talk=Talk.new(talk_params)
+    @user=User.find_by(id: @talk.your_id)
+    if @talk.save
+      flash[:notice]="送信しました"
+      redirect_to("/talks/#{@talk.your_id}")
+    end
   end
 
 
@@ -21,5 +30,9 @@ class TalksController < ApplicationController
   end
 
 
+  private
+  def talk_params
+    params.require(:talk).permit(:content,:your_id,:my_id,:chatfile)
+  end
 
 end

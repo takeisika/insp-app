@@ -1,10 +1,4 @@
-
-
-
-
-
-
-<p class="user_new_letter">新規ユーザー登録</p3>
+<p class="user_new_letter" id="user_new_responsive_letter">新規ユーザー登録</p3>
 <div class="user_signup">
 
 <% @user.errors.full_messages.each do |message| %>
@@ -13,7 +7,7 @@
   </div>
 <% end %>
 
-<%=form_tag("/users/create")do%>
+<%= form_tag(users_path, method: :post) do %>
 <p class="user_new_name_letter" >ユーザー名</p>
 <input name="username" value="<%= @user.name %>" placeholder="&#xf007;" class="user_new_awesome">
 <p class="user_new_password_letter">パスワード</p>

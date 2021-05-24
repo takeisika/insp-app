@@ -6,24 +6,23 @@
 
 
 <%if @user%>
-<div class="user_show guest_form">
+<div class="guest_form">
 <p class="user_new_letter guest_form_letter">ゲスト利用(閲覧用)</p3>
-     <div class="user_show_top guest_form_top">
+     <div class="guest_form_top">
         <%if @user.avator.attached?%>
           <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
         <%else%>
           <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
         <%end%>
         <p class="user_show_name"><%=@user.name%></p>
-        <p class="user_show_introduction"><%=@user.introduction%></p>
         <%=link_to("ゲスト利用","/users/guest",{method: :post, class:"user_new_button guest_form_button"})%>
       </div>
 </div>
 <%else%>
-<div class="user_show guest_form">
+<div class="guest_form">
 <p class="user_new_letter">ゲスト利用(閲覧用)</p3>
-     <div class="user_show_top guest_form_top">
-          <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
+     <div class="guest_form_top">
+          <%=image_tag "/default.jpg"%>
         <p class="user_show_name">guest</p>
       </div>
       <%=link_to("ゲスト利用","/users/guest",{method: :post, class:"user_new_button guest_form_button"})%>

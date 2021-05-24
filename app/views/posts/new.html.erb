@@ -1,0 +1,153 @@
+<div class="post_page_container">
+
+
+<% @post.errors.full_messages.each do |message| %>
+  <div class="form-error">
+    <%= message %>
+  </div>
+<% end %>
+
+<p class="post_new_page_letter">投稿してみよう！</p>
+<%= form_with model:@post,local:true do |form| %>
+
+  <div class="new_title">
+  <p>タイトル</p>
+  <%= form.text_area :title,placeholder:"タイトル入力（必須）",id:"new_title_form"%>
+  </div>
+
+
+  <div class="new_description">
+  <p>説明</p>
+  <%= form.text_area :content ,placeholder:"動画の内容を説明しよう！"%>
+  </div>
+
+  <div class="new_url">
+  <p>リンク</p>
+  <%= form.text_field :tube %>
+  </div>
+
+  
+
+  <div class="new_tag">
+  <p>タグ</p>
+  <%= form.text_field :tag ,placeholder:"先頭に#をつけて入力"%>
+  </div>
+
+  <div class="new_img">  
+  <p>写真 (jpg形式)</p>
+  <label>
+  <i class="fas fa-camera"></i> 選択
+  <%= form.file_field :files,multiple: true, id:"post_img", accept: "image/*" %>
+  </label>
+  </div>
+  <span id="result_clear">選択をクリアする</span>
+  <div id="result_post">
+  </div>
+
+  <div class="new_movie">  
+  <p>動画 (mp4形式)</p>
+  <label>
+  <i class="fas fa-video"></i> 選択
+  <%= form.file_field :movies,multiple: true, id:"post_video", accept: "video/*" %>
+  </label>
+  </div>
+  <div id="result_video"></div>
+
+
+  <div class="user_login_button post_new_submit">
+    <%= form.submit "投稿する"%>
+  </div>
+  
+
+
+
+  <%end%>
+
+  </div>
+
+
+<script>
+
+  $('#post_img').change(function(){
+    var fileUpload = $("input[type='file']");
+    if(parseInt(fileUpload.get(0).files.length) > 4) {
+      alert('選択できる画像は４点までです。');
+      $("#post_img").val("");
+      $("#result_post").css("display","none");
+      $(".new_movie label").css("opacity",1);
+      $(".new_movie label").css("cursor","pointer");
+      $(".new_movie input").attr('disabled', false);
+    }else{
+      var file = $(this).prop('files')
+      $(file).each(function(index) {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(file[index]);
+      fileReader.onloadend = function() {
+      $("#result_post").append('<a href="' + fileReader.result + '" rel="lightbox" data-lightbox="group"><img src="' + fileReader.result + '"/></a>');
+      $("#result_clear").show();
+      }
+      });
+      $(".new_movie label").css("opacity",0.5);
+      $(".new_movie label").css("cursor","default");
+      $(".new_movie input").attr('disabled', true);
+    }
+  });
+
+
+  $("#result_clear").click(function(){
+    $("#result_post").html("");
+    $("#post_img").val("");
+    $("#result_clear").hide();
+  });
+
+
+
+
+  
+  $('#post_video').change(function(){
+    var fileUpload = $("input[type='file']");
+    if(parseInt(fileUpload.get(1).files.length) > 1) {
+      alert('選択できる動画は２点までです。');
+      $("#post_video").val("");
+      $("#result_video").css("display","none");
+      $(".new_img label").css("opacity",1);
+      $(".new_img label").css("cursor","pointer");
+      $(".new_img input").attr('disabled', false);
+      return false;
+    }else{
+      $('video').remove();
+      var file = $(this).prop('files')
+      $(file).each(function(index) {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(file[index]);
+      fileReader.onloadend = function() {
+        $("#result_video").append('<video src="' + fileReader.result + '" type="video/mp4" controls></video>');
+      }
+      });
+      $(".new_img label").css("opacity",0.5);
+      $(".new_img label").css("cursor","default");
+      $(".new_img input").attr('disabled', true);
+    }
+  }); 
+
+
+
+  $(".user_login_button").css('opacity',0.5);
+  $(".user_login_button").attr('disabled', true);
+  $(".user_login_button").css('cursor','default');
+
+
+
+  $('#new_title_form').on('input', function(){
+  var input_text = $(this).val();
+  if(input_text==""){
+    $(".user_login_button").css('opacity',0.5)
+    $(".user_login_button").attr('disabled', true);
+    $(".user_login_button").css('cursor','default');  
+  }else{
+    $(".user_login_button").css('opacity',1)
+    $(".user_login_button").attr('disabled', false);
+    $(".user_login_button").css('cursor','pointer'); 
+  }
+});
+</script>

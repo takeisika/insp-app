@@ -1,6 +1,11 @@
-<%=form_tag("/comments/#{@comment.id}/update")do%>
+<div class="post_page_container">
+<div class="comment_edit_letter">編集してみよう！</div>
+<%=form_tag("/posts/#{@comment.post_id}/comments/#{@comment.id}",{method: :put})do%>
+<div class="new_description">
 <textarea name="commentupdate" class="comment_edit_edit"><%=@comment.content%></textarea>
-<p><input type="submit" value="編集完了"></p>
+</div>
+<div class="user_login_button post_new_submit">
+<input type="submit" value="編集完了">
+</div>
 <%end%>
-
-
+</div>

@@ -10,13 +10,13 @@ class CommentsController < ApplicationController
     @comment=Comment.find_by(id: params[:id])
     @comment.content=params[:commentupdate]
     if @comment.save
-      redirect_to("/posts/#{@comment.comment_id}/comment")
+      redirect_to("/posts/#{@comment.post_id}/comment")
     end
   end
 
   def destroy
     @comment=Comment.find_by(id: params[:id])
-    @post=Post.find_by(id: @comment.comment_id)
+    @post=Post.find_by(id: @comment.post_id)
     @comment_id=@comment.id
     @comment.destroy
     flash.now[:notice]="削除完了"

@@ -1,0 +1,37 @@
+<p class="following_title">いいねしたユーザー</p>
+
+<div class="following_container">
+
+<%@likes=Like.where(post_id: params[:id])%>
+<%@likes.each do |like|%>
+    <%@user=User.find_by(id: like.user_id)%>
+       <div class="following_user_index">
+       <div class="following_user_left">
+       <div class="following_user_img">
+         <%if @user.avator.attached?%>
+            <%=image_tag(@user.avator)%>
+         <%else%>
+            <%=image_tag "/default.jpg"%>
+         <%end%>
+         </div>
+         <p class="following_user_name">
+         　<%=link_to(@user.name,"/users/#{@user.id}")%>
+         </p>
+       </div>
+       <% @follow=Follow.find_by(following_id: @current_user.id,followed_id: @user.id) %>
+       <div class="following_user_right">
+       <div class="following_user_right_<%=@user.id%>">
+       <%if @current_user.id!=@user.id%>
+         <%if @follow%>
+           <p class="follow_button"><%=link_to("following","/users/#{@user.id}/follows/#{@follow.id}",method: :delete,remote: true)%></p>
+         <%else%>
+           <p class="not_follow_button"><%=link_to("follow","/users/#{@user.id}/follows",method: :post,remote: true)%></p>
+         <%end%>
+         <%end%>
+         </div>
+       </div>
+
+      </div>       
+<%end%>
+
+</div>

@@ -42,7 +42,7 @@
          </div></object>
          <div class="index_comments">
           
-           <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: post.id).count%></span>
+           <span class="fas fa-comment fa-xs"><%=Comment.where(post_id: post.id).count%></span>
           
          </div>
         </div>
@@ -51,8 +51,28 @@
       
       <div class="index_right">
        <div class="index_header">
+       <div class="index_header_left">
        <object class="index_user_name"><%=link_to(@user.name,"/users/#{@user.id}")%></object>
         <p><%= post.updated_at.to_s(:datetime_jp) %></p>
+        </div>
+        <div class="comment_edit">
+        <%if @current_user%>
+        <%if @current_user.id==post.user_id%>
+          <div class="post_edit_delete_modal_button">
+          <span class="fas fa-ellipsis-h fa-lg"></span>
+          <div class="post_edit_delete_modal_open">
+          <div class="post_edit_delete_modal_wrapper">
+          <div class="post_edit_delete_modal">
+          <object><%=link_to("編集","/posts/#{post.id}/edit",id:"post_edit_modal_letter")%></object>
+          <object><%=link_to("削除","/posts/#{post.id}",method: :delete,remote: true,class:"post_delete_modal_letter")%></object>
+          <p id="post_modal_back">戻る</p>         
+          </div>
+          </div>
+          </div> 
+          </div>
+         <%end%>
+         <%end%>
+       </div>        
        </div>
       
     
@@ -137,9 +157,13 @@
 
        <%if post.tube?%>
        <%@post_tube=post.tube%>
+       <%if @post_tube.first(17)!="https://youtu.be/"%>
+       <object><p class="index_right_file_url"><%=raw Rinku.auto_link(h(@post_tube))%></p></object>
+       <%else%>
        <%@post_tube=@post_tube.last(11)%>
        <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
-       <object class="index_right_file_url"><p><%=link_to("https://youtu.be/#{@post_tube}","https://youtu.be/#{@post_tube}")%></p></object>
+       <object><p><%=link_to("https://youtu.be/#{@post_tube}","https://youtu.be/#{@post_tube}")%></p></object>
+       <%end%>
        <%end%>
 
 
@@ -154,14 +178,10 @@
       
 
       
-      <div class="comment_edit">
-      <%if @current_user%>
-      <%if @current_user.id==post.user_id%>
-        <object><%=link_to("編集","/posts/#{post.id}/edit")%></object>
-        <object><%=link_to("削除","/posts/#{post.id}/destroy",method: :post,remote: true)%></object>
-       <%end%>
-       <%end%>
-     </div>
+
+
+
+
      
 
       
@@ -173,3 +193,44 @@
 <%end%>
 <%end%>
 </div>
+
+
+
+
+
+
+<script>
+
+var window_height = $(window).height();
+var modal_height = $(".post_edit_delete_modal").height();
+$(".post_edit_delete_modal").css("margin-top",((window_height - modal_height)/2) + "px");
+
+
+$(".post_edit_delete_modal_button").click(function(e){
+   $(this).find(".post_edit_delete_modal_open").fadeIn();
+   e.preventDefault();
+});
+
+
+$("#post_edit_modal_letter").click(function() {
+    window.location.href = $(this).attr('href'); 
+});
+
+
+
+$(".post_modal_back,.post_edit_delete_modal_open").click(function(e){
+   var target = $(e.target);
+   if(target.hasClass('post_delete_modal_letter')==false) {
+      $(".post_edit_delete_modal_open").fadeOut();
+      return false;
+   }
+});
+
+
+$(".index_user_name").hover(
+function(){
+  $(this).find(".hover_profile").fadeIn();
+},function(){
+   $(this).find(".hover_profile").fadeOut();
+});
+</script>

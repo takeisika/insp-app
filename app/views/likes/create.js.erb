@@ -1,4 +1,5 @@
 $('#likes_buttons_<%= @post.id %>').html("<%= j(render partial: 'posts/like', locals: {post: @post}) %>");
 
 
+
 $('#ranking_render').html("<%= j(render partial: 'posts/ranking') %>");

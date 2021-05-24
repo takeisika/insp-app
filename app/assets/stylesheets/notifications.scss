@@ -1,0 +1,116 @@
+// Place all the styles related to the notifications controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.notification_container{
+  width:45%;
+  margin:0 auto;
+  padding-bottom:70px;
+}
+
+
+.notification_title{
+    text-align:center;
+    font-size:40px;
+    color:rgb(175, 175, 175);
+    margin-bottom:30px;
+    margin-top:120px;
+}
+
+
+.notification_index{
+    border: solid 1px rgb(218, 217, 217);
+    margin-bottom: -1px;
+    padding-top:20px;
+    padding-bottom:15px;
+    padding-right:30px;
+    padding-left:20px;
+    display:flex;
+    background-color: white;
+}
+
+
+.notification_right img{
+    width:23px;
+    height:23px;
+    border-radius: 20px;
+    vertical-align: top;
+}
+
+.notification_index p{
+    margin-top:15px;
+    margin-bottom:3px;
+}
+
+.notification_index span{
+    font-size:11px;
+    color:rgb(107, 107, 107);
+}
+
+
+.notification_left{
+    margin-right:12px;
+    margin-left:2px;
+}
+
+
+#pink_heart:before{
+  color:#ff2581;
+  padding:0;
+}
+
+#pink_heart{
+  padding:0;   
+}
+
+
+.notification_left .fa-envelope,.fa-user{
+    color:#686868;
+}
+
+.notification_name_link{
+    font-weight: bold;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.notification_title_link{
+    font-weight: bold;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.notification_index:hover{
+    background-color:rgb(243, 243, 243);
+}
+
+#pink_heart:hover:before {
+    background-color:rgb(243, 243, 243);
+}
+
+
+
+
+.unread_notification .notification_index{
+    background-color: #eff6ff;
+}
+
+
+.notification_else_letter{
+    text-align:center;
+}
+
+
+@media (max-width: 670px) {
+    .notification_container{
+        width:100%;
+        margin:0 auto;
+        padding-bottom:70px;
+      }
+
+      .notification_title{
+        text-align:center;
+        font-size:40px;
+        color:rgb(175, 175, 175);
+        margin-bottom:30px;
+        margin-top:100px;
+    }
+}

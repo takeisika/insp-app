@@ -2,89 +2,202 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-.talk{
-    width:70%;
-    margin:0 auto;
-    background-color:white;
-    border: solid 1px rgb(170, 170, 170);
-    margin-top:100px;
-    height:500px;
-    position: relative;
+.talk_container{
+    padding-top:130px;
 }
 
-
+.talk{
+    width:40%;
+    margin:0 auto;
+    background-color:white;
+    border: solid 1px rgb(218, 217, 217);
+    height:600px;
+    position: relative;
+    box-sizing: border-box;
+}
 
 .talk_header{
     text-align:center;
+    border: solid 1px rgb(218, 217, 217);
+    margin-top:-1px;
+    margin-right:-1px;
+    margin-left:-1px;
+    display:flex;
+    align-items: center;
+    padding-left:20px;
+}
+
+.talk_header p{
+    margin-top:5px;
+    margin-bottom: 10px;
+}
+
+.talk_header img{
+    margin-top:5px;
+    margin-left:18px;
+    vertical-align: top;
+    object-fit: cover;
 }
 
 .talk_header_name{
-    background-color:rgb(78, 134, 255);
-    padding:15px;
+    background-color:white;
+    font-size: 16px;
     font-weight:bold;
-    color:rgb(236, 233, 233);
-    margin-top:0;
+    color:rgb(39, 39, 39);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding-left:10px;
+    padding-top:8px;
+    margin:0;
 }
 
 
 .talk_zone{
     overflow:scroll;
     height:70%;
+    padding-top:25px;
+    padding-bottom:25px;
+    padding-right:18px;
+    padding-left:18px;
 }
 
+
+//送信側プロフ
 .talk img {
-    width:30px;
-    height:30px;
-    margin-left:10px;
+    width:23px;
+    height:23px;
+    border-radius: 15px;
+    vertical-align: top;
+    object-fit: cover;
 }
 
 
-.talk img:hover{
-    opacity:0.7;
-}
 
 
 
-
-
+//送信(右)
 .talk_submit_user{
     text-align: right;
+    margin-bottom:25px;
 }
+
 
 
 
 .talk_submit_user_content{
+    max-width:70%;
     background-color:rgb(233, 233, 233);
-    padding:10px;
+    padding:8px;
     border-radius: 18px;
-    margin-right:20px;
-    margin-left:10px;
     display: inline-block;
-    max-width:60%;
     text-align: left;
+    box-sizing: border-box;
     word-wrap: break-word;
+    line-height:16px;
+    margin:0;
+}
+
+.talk_submit_user_content_time{
+    font-size:10px;
+    margin-top:5px;
+    margin-bottom:0;
+    color:rgb(107, 107, 107);
 }
 
 
+//受信(左)
+.talk_receive_user{
+    margin-bottom:25px;
+}
 
 .talk_receive_user_content{
     border: solid 1px rgb(197, 197, 197);
     padding:8px;
     border-radius: 18px;
-    margin-right:10px;
-    margin-left:10px;
     display: inline-block;
-    max-width:60%;
+    max-width:50%;
     word-wrap: break-word;
+    box-sizing: border-box;
+    line-height:16px;
+    margin:0;
+}
+
+.talk_receive_user_content_time{
+    font-size:10px;
+    margin-top:5px;
+    margin-bottom:0;
+    color:rgb(107, 107, 107);
+    margin-left:30px;
 }
 
 
 
 
+
+//送信ボタン
 .comment_button_text_area_message{
     position: absolute;
     bottom: 0;
-    margin:15px;
-    width:96%;
+    width:100%;
 }
+
+.comment_button_text_area_message form{
+    width:90%;
+    margin:0 auto;
+    margin-bottom:20px;
+}
+
+
+
+
+
+//画像送信機能
+#chat_file{
+    box-sizing: border-box;
+    display:inline-block;
+}
+
+#chat_file img{
+    width:150px;
+    height:200px;
+    border-radius: 15px;
+    vertical-align: top;
+    object-fit: cover;
+}
+
+
+
+//テキストボックス仕掛け
+.talk_file input{
+    display:none;
+}
+
+.talk_file label{
+    cursor: pointer;
+    margin-right:8px;
+}
+
+
+#talk_read{
+    color:rgb(94, 94, 94);
+    margin-left:3px;
+    margin-right:5px;
+}
+
+
+@media (max-width: 670px) {
+    .talk{
+        width:100%;
+        margin:0 auto;
+        background-color:white;
+        border: solid 1px rgb(218, 217, 217);
+        height:600px;
+        position: relative;
+        box-sizing: border-box;
+    }
+    .talk_container{
+        padding-top:60px;
+    }
+}
+
+
+

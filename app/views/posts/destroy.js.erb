@@ -1,3 +1,5 @@
 $('.index_<%=@post_id%>').html('');
 
+$('.user_show_second').html("<%= j(render partial: 'users/follow_number', locals: {user: @user}) %>");
+
 $('.flash').html('<p class="flash_letter"> <%=flash[:notice]%> </p>');

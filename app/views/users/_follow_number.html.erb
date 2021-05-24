@@ -1,0 +1,27 @@
+<%@posts_count=Post.where(user_id: @user.id)%>
+
+<p class="follow_post_number">投稿<span><%=@posts_count.count%></span>件</p>
+
+<% @followings=Follow.where(following_id: @user.id) %>
+
+<%if @followings.count>=1%>
+ <p class="follow_number">
+ <object><%= link_to("/users/#{@user.id}/followings") do %>
+     フォロー中<span><%=@followings.count%></span>人
+   <%end%></object>               
+ </p>
+<%else%>
+    <p class="follow_number">フォロー中<span>0</span>人</p>
+<%end%>
+
+<% @followers=Follow.where(followed_id: @user.id) %>
+
+<%if @followers.count>=1%>
+ <p class="follow_number">
+ <object><%= link_to("/users/#{@user.id}/followers") do %>
+    フォロワー<span><%=@followers.count%></span>人
+  <%end%></object>                
+ </p>              
+<%else%>
+  <p class="follow_number">フォロワー<span>0</span>人</p>
+<%end%>

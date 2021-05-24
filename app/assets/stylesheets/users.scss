@@ -91,26 +91,14 @@ a{
 
 
 
-.user_show{
-  text-align:center;
-}
 
 
-.user_show_top{
-  margin-top:30px;
-}
-
-.user_show img{
-  margin-top:100px;
-  width:80px;
-  height:80px;
-  border-radius: 20px;
-}
 
 
-.user_show img:hover{
-  opacity:0.7;
-}
+
+
+
+
 
 
 .user_show_name{
@@ -127,12 +115,16 @@ a{
 
 
 .user_show_profile_edit{
-  padding:5px;
-  margin:15px;
+  padding-right:4px;
+  padding-left:4px;
   border: 1px solid rgb(172, 181, 185);
   background-color:rgb(219, 225, 226);
   border-radius: 10px;
-  font-size:13px;
+  font-size:11px;
+  margin-right:20px;
+  margin-bottom:0;
+  margin-top:0;
+  margin-left:0;
 }
 
 .user_show_profile_edit :hover{
@@ -140,69 +132,15 @@ a{
 }
 
 
-.user_show i{
-  color:rgb(17, 126, 228)
-}
+
 
 .user_show i:hover{
   opacity:0.7;
 }
 
-.follow_button{
-  margin-bottom:50px;
-}
-
-.follow_button a{
-  border: 2px solid  #bebdbd;
-  color:white;
-  background-color:  #c5c5c5;
-  padding:5px;
-  border-radius: 3px;
-  font-weight: bold;
-}
-
-.not_follow_button a{
-  border: 2px solid  #cccccc;
-  color: #cccccc;
-  padding:5px;
-  border-radius: 3px;
-  font-weight: bold;
-}
-
-.follow_button a:hover{
-  opacity:0.7;
-}
-
-.not_follow_button a:hover{
-  opacity:0.7;
-}
 
 
 
-
-.user_show_list_button_at_post a:hover{
-   opacity:0.6;
-}
-
-
-.user_show_list_post_button_at_post a{
-  border-bottom: 1px solid rgb(5, 247, 235);
-}
-
-
-.user_show_list_like_button_at_post a{
-  color: rgb(175, 172, 172);
-}
-
-
-
-
-
-
-
-.user_show_list_button_at_like a:hover{
-  opacity:0.6;
-}
 
 
 .user_show_list_post_button_at_like a{
@@ -281,7 +219,7 @@ a{
 }
 
 .user_new_button{
-  margin-top:80px;
+  margin-top:50px;
   margin-bottom:0;
   margin-left:0;
   margin-right:0;
@@ -298,8 +236,8 @@ a{
 }
 
 .user_login_button{
-  margin-top:80px;
-  margin-bottom:0;
+  margin-top:50px;
+  margin-bottom:20px;
   margin-left:0;
   margin-right:0;
   background-color:rgb(59, 152, 240);
@@ -332,7 +270,7 @@ a{
 
 
 .guest_form_letter{
-  margin-bottom:70px;
+  margin-bottom:40px;
 }
 
 .guest_form img{
@@ -371,4 +309,468 @@ a{
 
 
 
+//フォローしてる人一覧
 
+.following_container{
+  width:40%;
+  margin:0 auto;
+  background-color: white;
+}
+
+
+.following_title{
+  text-align:center;
+  font-size:40px;
+  color:rgb(175, 175, 175);
+  margin-bottom:30px;
+  margin-top:120px;
+}
+
+
+.following_user_index{
+  border: solid 1px rgb(218, 217, 217);
+  margin: 0 0 -1px;
+  display:flex;
+  justify-content: space-between; 
+}
+
+.following_user_index:hover{
+  background-color:rgb(243, 243, 243);
+}
+
+
+.following_user_index img{
+  width:40px;
+  height:40px;
+  border-radius: 20px;
+  margin-top:10px;
+  margin-bottom:10px;
+  margin-right:10px;
+  margin-left:10px;
+  vertical-align: top;
+}
+
+
+
+.following_user_left{
+  display: flex;
+  justify-content: space-between; 
+}
+
+
+
+
+.following_user_name{
+  font-weight: bold;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  color:rgb(63, 63, 63);
+  margin:0;
+  line-height: 60px;
+}
+
+
+
+.following_user_right{
+  line-height: 60px;
+}
+
+.follow_button{
+  margin-top:0;
+  margin-bottom:0;
+  margin-right:20px;
+  margin-left:0;
+}
+
+.follow_button a{
+  border: 2px solid  #bbbbbb;
+  color:white;
+  background-color:  #bbbbbb;
+  padding:3px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.not_follow_button{
+  margin-top:0;
+  margin-bottom:0;
+  margin-right:20px;
+  margin-left:0;
+}
+
+.not_follow_button a{
+  border: 2px solid  #cccccc;
+  color: #cccccc;
+  padding:3px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.follow_button a:hover{
+  opacity:0.7;
+}
+
+.not_follow_button a:hover{
+  opacity:0.7;
+}
+
+
+.following_user_name a:hover{
+  text-decoration: underline;
+}
+
+
+
+
+//ユーザー詳細ページ
+
+
+
+
+
+.user_show_container{
+  width:55%;
+  margin:0 auto;
+  padding-top:120px;
+  padding-bottom: 100px;
+}
+
+
+.user_show_top{
+  display:flex;
+  margin:0 auto;
+  width:75%;
+}
+
+
+
+.user_show_top img{
+  width:140px;
+  height:140px;
+  border-radius: 70px;
+  margin-bottom:30px;
+  margin-right:60px;
+  margin-left:35px;
+  object-fit: cover;
+}
+
+
+.user_show_first{
+  display:flex;
+  justify-content: space-between;
+  line-height:25px;
+}
+
+.user_show_name{
+  font-size:25px;
+}
+
+.user_show_first_left{
+  display:flex;
+  justify-content: space-between;
+}
+
+.user_show_message .fa-envelope{
+  color:#0095f6;
+  border-radius: 25px;
+  padding:7px 4px;
+  border: solid 1px #0095f6;
+  margin-right:50px;
+}
+
+
+.user_show_first_left .user_show_follow_button{
+  padding-top:4px;
+}
+
+.user_show_first_left .follow_button{
+  margin-right:10px;
+}
+
+.user_show_first_left .not_follow_button{
+  margin-right:10px;
+}
+
+
+
+
+.user_show_second{
+  display:flex;
+  margin-top:5px;
+}
+
+.follow_post_number {
+  margin-right:20px;
+}
+
+.follow_post_number span{
+  font-weight: bold;
+}
+
+
+.follow_number {
+  margin-right:20px;
+}
+
+
+.follow_number span{
+  font-weight: bold;
+}
+
+.user_show_third {
+  font-size:12px;
+  color:rgb(110, 110, 110);
+}
+
+.user_show_third a{
+  font-size:12px;
+  color:rgb(110, 110, 110);
+}
+
+.user_show_third span{
+  font-weight: bold;
+  color:rgb(46, 46, 46);
+}
+
+.user_show_list_button_at_post{
+  width:100%;
+  display:flex;
+  margin-top:60px;
+}
+.user_show_list_post_button_at_post{
+  width:50%;
+  text-align: center;
+}
+
+.user_show_list_like_button_at_post{
+  width:50%;
+  text-align: center;
+}
+
+
+
+.user_show_list_button_at_post span{
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.user_show_list_post_button_at_post{
+  border-bottom: 2px solid rgb(24, 24, 24);
+}
+
+.user_show_like_index{
+  display:none;
+  padding:0;
+}
+
+.like_show_container{
+  padding:0;
+  width:100%;
+}
+
+
+.user_show_list_else_post{
+  padding-top: 10px;
+  text-align:center;
+}
+
+.user_show_list_else_like{
+  padding-top: 10px;
+  text-align:center;
+}
+
+
+.guest_form img{
+  width:80px;
+  height:80px;
+  border-radius: 20px;
+}
+
+.guest_form{
+  font-size:13px;
+}
+
+.guest_form_top{
+  margin-bottom:15px;
+}
+
+
+
+.form-error{
+  color:rgb(199, 2, 2);
+}
+
+
+#user_introduction{
+  margin:0;
+}
+
+#user_edit_description{
+  margin-top:15px;
+}
+
+
+#logout_button{
+  display:inline-block;
+  width:100%;
+}
+
+.logout_wrapper{
+  background-color: #eeeeee;
+  width:100%;
+  text-align:center;
+  padding:10px;
+  box-sizing: border-box;
+}
+
+.logout_wrapper a{
+  color:#c94d4d;
+  font-weight: bold;
+  font-size:13px;
+}
+
+
+
+.user_new_letter{
+  text-align:center;
+  font-size:40px;
+  color:rgb(175, 175, 175);
+  margin-top:150px;
+}
+
+
+
+@media (max-width: 670px) {
+  .user_new_letter{
+    text-align:center;
+    font-size:40px;
+    color:rgb(175, 175, 175);
+    margin-top:100px;
+  }
+
+  .following_title{
+    text-align:center;
+    font-size:40px;
+    color:rgb(175, 175, 175);
+    margin-bottom:30px;
+    margin-top:100px;
+  }
+  .following_container{
+    width:100%;
+    margin:0 auto;
+    background-color: white;
+  }
+  .user_show_container{
+    width:100%;
+    margin:0 auto;
+    padding-top:100px;
+    padding-bottom: 100px;
+  }
+
+  .user_show_top img{
+    width:120px;
+    height:120px;
+    border-radius: 70px;
+    margin-bottom:15px;
+    margin-right:40px;
+    margin-left:40px;
+    object-fit: cover;
+  }
+
+  .user_show_top{
+    display:flex;
+    margin:0 auto;
+    width:100%;
+  }
+  .follow_number {
+    margin-right:10px;
+    font-size:13px;
+  }
+  
+  
+  .follow_number span{
+    font-weight: bold;
+  }
+
+  .follow_post_number {
+    margin-right:10px;
+    font-size:13px;
+  }
+
+  .user_signup{
+    width:80%;
+    background-color:white;
+    margin:0;
+    margin-bottom:150px;
+    padding-top:30px;
+    padding-bottom:30px;
+    padding-right:50px;
+    padding-left:50px;
+    border: solid 1px rgb(218, 217, 217);
+  }
+
+  #user_new_responsive_letter{
+    margin-top:140px;
+    margin-bottom:20px;
+  }
+  .user_show_message .fa-envelope{
+    color:#0095f6;
+    border-radius: 25px;
+    padding:7px 4px;
+    border: solid 1px #0095f6;
+    margin-right:10px;
+  }
+
+  .user_show_first_left .user_show_follow_button{
+    padding-top:4px;
+  }
+
+  .user_show_name{
+    padding-top:3px;
+    margin:0;
+    font-weight: bold;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size:20px;
+  }
+
+  .follow_button{
+    margin-top:0;
+    margin-bottom:0;
+    margin-right:20px;
+    margin-left:0;
+  }
+  
+  .follow_button a{
+    border: 2px solid  #bbbbbb;
+    color:white;
+    background-color:  #bbbbbb;
+    padding:3px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size:14px;
+  }
+  
+  .not_follow_button{
+    margin-top:0;
+    margin-bottom:0;
+    margin-right:20px;
+    margin-left:0;
+  }
+  
+  .not_follow_button a{
+    border: 2px solid  #cccccc;
+    color: #cccccc;
+    padding:3px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size:14px;
+  }
+
+  .guest_form_button{
+    display: inline-block;
+    width:18%;
+    margin-top:20px;
+    padding:5px;
+    background-color: rgb(59, 152, 240);
+  }
+
+}
