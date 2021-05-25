@@ -112,7 +112,7 @@
     top:30px;
     border-radius: 10px;
     box-shadow: 0 2px 6px #c1ced7;
-    width:350px;
+    width:330px;
     height:auto;
 }
 
@@ -144,13 +144,13 @@
     font-weight: bold;
     color: rgb(32, 32, 32);
     font-size:18px;
-    margin-top:4px;
+    margin-top:1px;
 }
 
 #hover_profile .user_show_first{
     line-height: 18px;
-    margin-top:13px;
-    margin-bottom:8px;
+    margin-top:12px;
+    margin-bottom:2px;
 }
 
 #hover_profile .post_index_follow_button{
@@ -166,9 +166,9 @@
 #hover_profile .fa-envelope{
     color:#0095f6;
     border-radius: 25px;
-    padding:7px 4px;
+    padding:6px 3px;
     border: solid 1px #0095f6;
-    margin-right:25px;
+    margin-right:15px;
 }
 
 #hover_profile .follow_post_number{
@@ -176,12 +176,15 @@
     font-weight: normal;
 }
 
-
+#hover_profile .follow_number{
+    font-weight: normal;
+    padding-left:3px;
+}
 
 #hover_profile .follow_number a{
     font-weight: normal;
     padding-right:3px;
-    padding-left:11px;
+    padding-left:1px;
 }
 
 

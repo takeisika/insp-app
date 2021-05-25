@@ -115,16 +115,24 @@ a{
 
 
 .user_show_profile_edit{
-  padding-right:4px;
-  padding-left:4px;
+  padding-right:1px;
+  padding-left:1px;
   border: 1px solid rgb(172, 181, 185);
   background-color:rgb(219, 225, 226);
   border-radius: 10px;
-  font-size:11px;
   margin-right:20px;
   margin-bottom:0;
   margin-top:0;
   margin-left:0;
+}
+
+.user_show_profile_edit a{
+  padding-right:5px;
+  padding-left:5px;
+  padding-top:2px;
+  padding-bottom:2px;
+  font-weight: normal;
+  font-size:12px;
 }
 
 .user_show_profile_edit :hover{
@@ -534,7 +542,7 @@ a{
 .user_show_list_button_at_post{
   width:100%;
   display:flex;
-  margin-top:60px;
+  margin-top:30px;
 }
 .user_show_list_post_button_at_post{
   width:50%;
@@ -643,6 +651,7 @@ a{
 
 
 
+
 @media (max-width: 390px) {
   .user_new_letter{
     text-align:center;
@@ -666,7 +675,7 @@ a{
   .user_show_container{
     width:100%;
     margin:0 auto;
-    padding-top:100px;
+    padding-top:80px;
     padding-bottom: 100px;
   }
 

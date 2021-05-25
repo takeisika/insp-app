@@ -238,7 +238,7 @@
        <%if @post.movies.attached?%>
        <div class="files_wrap">
        <div id="file1_0">
-        <object><video src="<%= rails_blob_path(@post.movies[0]) %>" type="video/mp4" controls></video></object>
+        <object><video playsinline src="<%= rails_blob_path(@post.movies[0]) %>" type="video/mp4" controls></video></object>
        </div>
        </div>
        <%end%>
@@ -253,7 +253,7 @@
        <%@post_tube=@post_tube.last(11)%>
        <div class="files_wrap">
        <div id="file1_0">
-       <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
+       <object><iframe playsinline src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
        </div>
        </div>
        <object><p><%=link_to("https://youtu.be/#{@post_tube}","https://youtu.be/#{@post_tube}")%></p></object>

@@ -172,7 +172,7 @@
        <%if @post.tube?%>
        <%@post_tube=@post.tube%>
        <%@post_tube=@post_tube.last(11)%>
-       <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
+       <object><iframe playsinline src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
        <object class="index_right_file_url"><p><%=link_to("https://youtu.be/#{@post_tube}","https://youtu.be/#{@post_tube}")%></p></object>
        <%end%>
 

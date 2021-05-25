@@ -122,6 +122,7 @@ html{
 .index_header{
   display:flex;
   justify-content: space-between;
+  margin-left:1px;
 }
 
 .index_header_left{
@@ -151,7 +152,7 @@ html{
   vertical-align: top;
   margin:0;
   font-weight: bold;
-  font-size:12px;
+  font-size:13px;
   padding-right:10px;
   padding-left:10px;
 }
@@ -167,13 +168,23 @@ html{
 
 
 .index_title{
-  margin:15px;
+  margin-top:4px;
+  margin-bottom: 8px;
+  margin-left:12px;
+  margin-right:15px;
 }
 
 .index_setu{
   font-size:12px;
-  padding-right:10px;
-  padding-left:10px;
+  margin-top:4px;
+  margin-bottom: 10px;
+  margin-left:13px;
+  margin-right:12px;
+}
+
+.index_setu p{
+  margin-top: 6px;
+  margin-bottom: 3px;
 }
 
 
@@ -360,7 +371,7 @@ td{
 .index_right img{
   border: solid 1px rgb(218, 217, 217);
   margin-top:30px;
-  margin-bottom:35px;
+  margin-bottom:20px;
 }
 
 
@@ -382,8 +393,9 @@ td{
   border: solid 1px rgb(199, 199, 199);
   border-radius: 30px;
   overflow: hidden;
-  margin-top:25px;
+  margin-top:20px;
   margin-bottom:35px;
+  margin-left:48px;
 }
 
 
@@ -578,7 +590,6 @@ td{
 
 .tag a{
   color:rgb(0, 119, 255);
-  padding-left:5px;
 }
 
 .tag a:hover{
@@ -791,9 +802,7 @@ td{
   padding-left: 5px;
 }
 
-.index_setu a{
-  padding-left: 5px;
-}
+
 
 
 .new_img input{
@@ -904,6 +913,78 @@ td{
   font-size:35px;
   color:rgb(175, 175, 175);
   margin-bottom:10px;
+}
+.index_header{
+  display:flex;
+  justify-content: space-between;
+  margin-left:5px;
+}
+.index_title{
+  margin-top:5px;
+  margin-bottom:15px;
+  margin-right:25px;
+  margin-left:24px;
+}
+.index_setu p{
+  margin-top:0;
+  margin-bottom:0;
+  margin-right:0;
+  margin-left:0;
+}
+.index_setu{
+  margin-top:3px;
+  margin-bottom:3px;
+  margin-left:15px;
+}
+#file1_0{
+  width:100%;
+  height:200px;
+}
+#file2_0{
+  width:50%;
+  height:200px;
+  margin-right: 2px;
+}
+#file2_1{
+  width:50%;
+  height:200px;
+}
+#file3_0{
+  width:50%;
+  height:200px;
+  margin-right: 2px;
+}
+#file3_12{
+  width:50%;
+  height:200px;
+}
+#file4_01{
+  width:50%;
+  height:200px;
+  margin-right: 2px;
+}
+#file4_23{
+  width:50%;
+  height:200px;
+}
+#result_post img{
+  width:100px;
+  height:100px;
+  vertical-align: top;
+  margin:10px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.files_wrap{
+  width:85%;
+  display: flex;
+  margin:0 auto;
+  border: solid 1px rgb(199, 199, 199);
+  border-radius: 30px;
+  overflow: hidden;
+  margin-top:20px;
+  margin-bottom:35px;
+  margin-left:22px;
 }
 }
 
