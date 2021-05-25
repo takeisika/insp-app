@@ -7,7 +7,7 @@
 
 <%if @user%>
 <div class="guest_form">
-<p class="user_new_letter guest_form_letter">ゲスト利用(閲覧用)</p3>
+<p class="user_new_letter guest_form_letter">ゲスト(閲覧用)</p3>
      <div class="guest_form_top">
         <%if @user.avator.attached?%>
           <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
