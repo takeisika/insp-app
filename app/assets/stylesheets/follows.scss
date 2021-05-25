@@ -215,7 +215,7 @@
 
 
 
-@media (max-width: 375px) {
+@media (max-width: 390px) {
     .user_show_two_point_five{
         font-size:12px;
     }
@@ -227,5 +227,17 @@
         margin:0 auto;
         display: inline-block;
         height:138px;
+    }
+    .follow_container{
+        padding-top:40px;
+        padding-bottom: 100px;
+        width:55%;
+        margin:0 auto;
+    }
+    .follow_index_timeline_letter{
+        text-align:center;
+        font-size:35px;
+        color:rgb(175, 175, 175);
+        margin-bottom:20px;
     }
 }

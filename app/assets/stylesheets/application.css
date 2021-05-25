@@ -179,7 +179,7 @@ html{
     z-index:150;
     position:absolute;
     top:17px;
-    right:87px;
+    right:110px;
 }
 
 
@@ -197,7 +197,7 @@ html{
     z-index:150;
     position:absolute;
     top:17px;
-    right:130px;
+    right:154px;
 }
 
 
@@ -214,7 +214,7 @@ html{
 
 
 
-@media (max-width: 670px) {
+@media (max-width: 390px) {
     .title_insp a{
       padding-left:0;
     }
@@ -224,14 +224,16 @@ html{
       }
 
     .title_insp_login {
-        padding-left:30px;
+        padding:0;
+        margin-left: 20px;
+        padding-bottom:2px;
     }
   }
 
 
 
 
-@media (max-width: 670px) {
+@media (max-width: 390px) {
     .application-right{
       margin-right:8px;
     }
@@ -245,8 +247,8 @@ html{
         font-size:10px;
         z-index:150;
         position:absolute;
-        top:17px;
-        right:65px;
+        top:15px;
+        right:47px;
     }
 
 
@@ -259,8 +261,8 @@ html{
         font-size:10px;
         z-index:150;
         position:absolute;
-        top:17px;
-        right:108px;
+        top:15px;
+        right:82px;
     }
     .menu_button_else a{
         color:white;
@@ -286,4 +288,21 @@ html{
         line-height: 50px;
         display:inline-block;
      }
+     .menu_button a{
+        color:white;
+        line-height: 50px;
+        padding-top:0;
+        padding-right:12px;
+    }
+    .header_menu{
+        display:flex;
+        justify-content:space-between;
+        padding-top:2px;
+        padding-bottom:2px;
+    }
+    input, button, textarea, select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
   }

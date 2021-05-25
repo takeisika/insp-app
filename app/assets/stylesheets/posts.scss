@@ -73,7 +73,7 @@ html{
   margin:0 auto;
 }
 
-@media (max-width: 670px) {
+@media (max-width: 390px) {
   .follow_container {
     width: 100%;
   }
@@ -850,11 +850,13 @@ td{
 }
 
 
+#hashsearch{
+  border: solid 1px #dad9d9;
+}
 
 
 
-
-@media (max-width: 670px) {
+@media (max-width: 390px) {
   table {
     border-collapse: collapse;
     text-align:center;
@@ -866,11 +868,11 @@ td{
     padding-top:30px;
   }
   #ranking_render{
-    margin-top:100px;
+    margin-top:70px;
     background-color: rgb(250, 249, 249);
   }
   .post_page_container{
-    padding-top:100px;
+    padding-top:80px;
     padding-bottom: 100px;
     width:80%;
     margin:0 auto;
@@ -896,6 +898,13 @@ td{
   .index_right{
     width:88%;
   }
+
+.post_edit_page_letter,.post_new_page_letter{
+  text-align:center;
+  font-size:35px;
+  color:rgb(175, 175, 175);
+  margin-bottom:10px;
+}
 }
 
 

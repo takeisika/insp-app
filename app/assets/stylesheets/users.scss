@@ -637,9 +637,13 @@ a{
   margin-top:150px;
 }
 
+#user_name{
+  border: solid 1px #dad9d9;
+}
 
 
-@media (max-width: 670px) {
+
+@media (max-width: 390px) {
   .user_new_letter{
     text-align:center;
     font-size:35px;
@@ -649,10 +653,10 @@ a{
 
   .following_title{
     text-align:center;
-    font-size:40px;
+    font-size:35px;
     color:rgb(175, 175, 175);
     margin-bottom:30px;
-    margin-top:100px;
+    margin-top:80px;
   }
   .following_container{
     width:100%;
@@ -667,12 +671,12 @@ a{
   }
 
   .user_show_top img{
-    width:120px;
-    height:120px;
+    width:100px;
+    height:100px;
     border-radius: 70px;
     margin-bottom:15px;
-    margin-right:40px;
-    margin-left:40px;
+    margin-right:20px;
+    margin-left:25px;
     object-fit: cover;
   }
 
@@ -683,7 +687,7 @@ a{
   }
   .follow_number {
     margin-right:10px;
-    font-size:13px;
+    font-size:11px;
   }
   
   
@@ -693,11 +697,10 @@ a{
 
   .follow_post_number {
     margin-right:10px;
-    font-size:13px;
+    font-size:11px;
   }
 
   .user_signup{
-    width:78%;
     background-color:white;
     margin:0;
     margin-bottom:150px;
@@ -771,6 +774,9 @@ a{
     margin-top:20px;
     padding:5px;
     background-color: rgb(59, 152, 240);
+  }
+  .user_show_right{
+    margin-top:8px;
   }
 
 }

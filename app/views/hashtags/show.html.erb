@@ -105,53 +105,70 @@
 
 
        <div class="index_right_file">
-       
-
+           
+    
        <%if post.files.attached?%>
        <%if post.files.count==1 %>
-       <% post.files.each do |file| %>
-          <object class="one"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
-       <%end%>
-       <%end%>
-       <%if post.files.count==2 %>
-       <% post.files.each do |file| %>
-          <object class="two"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
-       <%end%>
-       <%end%>
-       <%if post.files.count==3 %>
-       <% post.files.each do |file| %>
-          <object class="three"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
-       <%end%>
-       <%end%>
-       <%if post.files.count==4 %>
-       <% post.files.each do |file| %>
-          <object class="four"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
-       <%end%>
-       <%end%>
+        <div class="files_wrap">
+         <div id="file1_0">
+          <object><%= link_to image_tag(post.files[0]),post.files[0], :rel => "lightbox" %></object>
+         </div>
+        </div>
        <%end%>
 
+       <%if post.files.count==2 %>
+       <div class="files_wrap">
+         <div id="file2_0">
+          <object><%= link_to image_tag(post.files[0]),post.files[0], :rel => "lightbox[#{post.id}]" %></object>
+         </div>
+         <div id="file2_1">
+          <object><%= link_to image_tag(post.files[1]),post.files[1], :rel => "lightbox[#{post.id}]" %></object>
+         </div>
+        </div>
+       <%end%>
+
+
+
+       <%if post.files.count==3 %>
+       <div class="files_wrap">
+          <div id="file3_0">
+           <object><%= link_to image_tag(post.files[0]),post.files[0], :rel => "lightbox[#{post.id}]" %></object>
+          </div>
+          <div id="file3_12">
+           <object id="file3_1"><%= link_to image_tag(post.files[1]),post.files[1], :rel => "lightbox[#{post.id}]" %></object>
+           <object id="file3_2"><%= link_to image_tag(post.files[2]),post.files[2], :rel => "lightbox[#{post.id}]" %></object>
+          </div>
+       </div>
+       <%end%>
+
+
+
+
+
+       
+       <%if post.files.count==4 %>
+       <div class="files_wrap">
+          <div id="file4_01">
+          <object id="file4_1"><%= link_to image_tag(post.files[0]),post.files[0], :rel => "lightbox[#{post.id}]" %></object>
+          <object id="file4_2"><%= link_to image_tag(post.files[1]),post.files[1], :rel => "lightbox[#{post.id}]" %></object>
+          </div>
+          <div id="file4_23">
+          <object id="file4_3"><%= link_to image_tag(post.files[2]),post.files[2], :rel => "lightbox[#{post.id}]" %></object>
+          <object id="file4_4"><%= link_to image_tag(post.files[3]),post.files[3], :rel => "lightbox[#{post.id}]" %></object>
+          </div>
+       </div>
+       <%end%>
+
+       <%end%>
+
+       
 
        <%if post.movies.attached?%>
-       <%if post.movies.count==1 %>
-       <% post.movies.each do |movie| %>
-          <object class="one"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-       <%end%>
-       <%end%>
-       <%if post.movies.count==2 %>
-       <% post.movies.each do |movie| %>
-          <object class="two"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-       <%end%>
-       <%end%>
-       <%if post.movies.count==3 %>
-       <% post.movies.each do |movie| %>
-          <object class="three"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-       <%end%>
-       <%end%>
-       <%if post.movies.count==4 %>
-       <% post.movies.each do |movie| %>
-          <object class="four"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-       <%end%>
-       <%end%>
+       <div class="files_wrap">
+       <div id="file1_0">
+        <object><video src="<%= rails_blob_path(post.movies[0]) %>" type="video/mp4" controls></video></object>
+       </div>
+       </div>
        <%end%>
 
 
@@ -161,7 +178,11 @@
        <object><p class="index_right_file_url"><%=raw Rinku.auto_link(h(@post_tube))%></p></object>
        <%else%>
        <%@post_tube=@post_tube.last(11)%>
+       <div class="files_wrap">
+       <div id="file1_0">
        <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
+       </div>
+       </div>
        <object><p><%=link_to("https://youtu.be/#{@post_tube}","https://youtu.be/#{@post_tube}")%></p></object>
        <%end%>
        <%end%>

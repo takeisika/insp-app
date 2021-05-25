@@ -184,7 +184,7 @@
 }
 
 
-@media (max-width: 670px) {
+@media (max-width: 390px) {
     .talk{
         width:100%;
         margin:0 auto;
@@ -195,7 +195,17 @@
         box-sizing: border-box;
     }
     .talk_container{
-        padding-top:60px;
+        padding-top:56px;
+    }
+    .talk_header{
+        text-align:center;
+        border: solid 1px rgb(218, 217, 217);
+        margin-top:-1px;
+        margin-right:-1px;
+        margin-left:-1px;
+        display:flex;
+        align-items: center;
+        padding-left:12px;
     }
 }
 
