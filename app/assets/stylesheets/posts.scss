@@ -554,7 +554,6 @@ td{
   object-fit: cover;
   vertical-align: top;
   height:100%;
-
 }
 
 
@@ -982,6 +981,9 @@ td{
   margin-top:20px;
   margin-bottom:35px;
   margin-left:22px;
+}
+iframe {
+  max-width: 100%;
 }
 }
 

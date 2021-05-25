@@ -322,6 +322,9 @@
 
 
 <script>
+if (window.matchMedia('(max-width: 390px)').matches) {
+   $('#file1_0 video').attr('poster', '/post.JPG');
+}
 
 var window_height = $(window).height();
 var modal_height = $(".post_edit_delete_modal").height();
@@ -356,9 +359,7 @@ function(){
    $(this).find("#hover_profile").fadeOut();
 });
 
-if (window.matchMedia('(max-width: 390px)').matches) {
-   $('#file1_0 video').attr('poster', 'post.JPG');
-}
+
 
 </script>
 
