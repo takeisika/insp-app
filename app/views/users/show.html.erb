@@ -657,4 +657,8 @@ function(){
 },function(){
    $(this).find("#hover_profile").fadeOut();
 });
+
+if (window.matchMedia('(max-width: 390px)').matches) {
+   $('#file1_0 video').attr('poster', 'post.JPG');
+}
 </script>

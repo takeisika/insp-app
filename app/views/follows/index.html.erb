@@ -302,7 +302,7 @@
            <%@post_tube=@post_tube.last(11)%>
            <div class="files_wrap">
            <div id="file1_0">
-           <object><iframe playsinline src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
+           <iframe playsinline src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe>
            </div>
            </div>
            <object><p><%=link_to("https://youtu.be/#{@post_tube}","https://youtu.be/#{@post_tube}")%></p></object>
@@ -386,7 +386,7 @@ function(){
 
 
 if (window.matchMedia('(max-width: 390px)').matches) {
-   $('#file1_0 video').attr('poster', 'poster.jpg');
+   $('#file1_0 video').attr('poster', 'post.JPG');
 }
 </script>
 
