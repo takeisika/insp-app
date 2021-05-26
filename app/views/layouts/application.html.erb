@@ -21,7 +21,7 @@
   <div class="header">
    <%if @current_user%>
    <div class="header_menu">
-   <div class="title_insp_login">insp</div>
+   <div class="title_insp_login"><%=link_to("insp","/home/about")%></div>
    <div class="menu_button">
        <%=link_to("","/follows", class:"fas fa-home  fa-lg index_button") %>
        <%=link_to("","/posts", class:"fas fa-medal  fa-lg index_button")%>

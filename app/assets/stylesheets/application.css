@@ -42,7 +42,7 @@ html{
    display:inline-block;
 }
 
-.title_insp_login {
+.title_insp_login a{
     color:rgb(255, 255, 255);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     opacity:1;
@@ -212,8 +212,6 @@ html{
 
 
 
-
-
 @media (max-width: 390px) {
     .title_insp a{
       padding-left:0;
@@ -223,7 +221,7 @@ html{
         padding-left:27px;
       }
 
-    .title_insp_login {
+    .title_insp_login a{
         padding:0;
         margin-left: 20px;
         padding-bottom:2px;
