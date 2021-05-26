@@ -122,13 +122,18 @@
       fileReader.readAsDataURL(file[index]);
       fileReader.onloadend = function() {
         $("#result_video").append('<video src="' + fileReader.result + '" type="video/mp4" controls></video>');
-      }
+        if (window.matchMedia('(max-width: 390px)').matches) {
+          $('video').attr('poster', '/post.JPG');
+        }         
+      }     
       });
       $(".new_img label").css("opacity",0.5);
       $(".new_img label").css("cursor","default");
       $(".new_img input").attr('disabled', true);
     }
   }); 
+
+
 
 
 
