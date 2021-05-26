@@ -121,12 +121,14 @@
     display: flex;
 }
 
+
 #hover_profile img{
   width:65px;
   height:65px;
   margin-top:14px;
   margin-left:5px;
   border:none;
+  object-fit: cover;
 }
 
 #hover_profile .user_show_left{
