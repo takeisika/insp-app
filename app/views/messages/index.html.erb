@@ -1,7 +1,7 @@
 <p class="following_title">メッセージ一覧</p>
 
 <div class="following_container">
-<%@talks=Talk.where(my_id: @current_user.id).or(Talk.where(your_id: @current_user.id)).select(:my_id,:your_id).distinct.order(id: :DESC)%>
+<%@talks=Talk.where(my_id: @current_user.id).or(Talk.where(your_id: @current_user.id)).order(id: :DESC).select(:my_id,:your_id,:id).distinct%>
 
 <%if Talk.where(my_id: @current_user.id).or(Talk.where(your_id: @current_user.id)).count>=1%>
 
