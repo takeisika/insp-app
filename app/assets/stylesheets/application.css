@@ -29,7 +29,7 @@ html{
 }
 
 
-.title_insp a{
+.title_insp {
    color:rgb(255, 255, 255);
    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
    opacity:1;
@@ -42,7 +42,7 @@ html{
    display:inline-block;
 }
 
-.title_insp_login a{
+.title_insp_login {
     color:rgb(255, 255, 255);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     opacity:1;
@@ -213,15 +213,12 @@ html{
 
 
 @media (max-width: 390px) {
-    .title_insp a{
-      padding-left:0;
-    }
 
     .title_insp {
         padding-left:27px;
       }
 
-    .title_insp_login a{
+    .title_insp_login {
         padding:0;
         margin-left: 20px;
         padding-bottom:2px;
@@ -275,13 +272,12 @@ html{
     .application_guest{
         margin-right:10px;
     }
-    .title_insp a{
+    .title_insp {
         color:rgb(255, 255, 255);
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         opacity:1;
         font-size:30px;
         margin:0;
-        padding-left:0;
         padding-top:1px;
         padding-bottom:1px;
         line-height: 50px;

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'notifications/index'
   get 'messages/index'
-  get "/"=>"home#about"
+  get "/"=>"users#guest_form"
 
   resources:posts do
     resources:comments do
