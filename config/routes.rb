@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'notifications/index'
   get 'messages/index'
-  get "/"=>"users#new"
+  get "/"=>"follows#index"
 
   resources:posts do
     resources:comments do
