@@ -122,7 +122,7 @@
       fileReader.readAsDataURL(file[index]);
       fileReader.onloadend = function() {
         $("#result_video").append('<video src="' + fileReader.result + '" type="video/mp4" controls></video>');
-        if (window.matchMedia('(max-width: 390px)').matches) {
+        if (window.matchMedia('(max-width: 430px)').matches) {
           $('video').attr('poster', '/post.JPG');
         }         
       }     
