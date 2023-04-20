@@ -4,7 +4,7 @@
 </video>
 
 <h1>Features:</h1>
-<p> Login, guest, posting, favoriting, notifications, messaging, rankings, following, search, hashtag, and Ajax, among others</p>
+<p> Login, guest, post, favorite, notification, message, rankings, follow, search, hashtag, and Ajax, among others.</p>
 <p> P.S. Amazon S3 for storage. done with setting up the domain, and successfully deploying it to a production environment.</p>
 
 
